@@ -1,0 +1,39 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.soul_stealer.first_person_hold": {
+			"loop": true,
+			"bones": {
+				"soulStealer": {
+					"rotation": [
+						66,
+						60,
+						-60
+					],
+					"position": [
+						3,
+						32,
+						4
+					]
+				}
+			}
+		},
+		"animation.soul_stealer.third_person_hold": {
+			"loop": true,
+			"bones": {
+				"soulStealer": {
+					"rotation": [
+						90,
+						0,
+						0
+					],
+					"position": [
+						-0.5,
+						23.5,
+						5.5
+					]
+				}
+			}
+		}
+	}
+}

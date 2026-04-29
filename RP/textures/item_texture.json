@@ -1,0 +1,13 @@
+{
+	"texture_data": {
+		"soul_stealer": {
+			"textures": "textures/items/soul_stealer"
+		},
+		"soul_amulet": {
+			"textures": "textures/items/soul_amulet"
+		},
+		"broken_soul_amulet": {
+			"textures": "textures/items/broken_soul_amulet"
+		}
+	}
+}

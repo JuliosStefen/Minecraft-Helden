@@ -1,0 +1,1672 @@
+{
+    "namespace": "hud",
+    "hud_title_text/title_frame/title": {
+        "modifications": []
+    },
+    "root_panel": {
+        "modifications": [
+            {
+                "array_name": "controls",
+                "operation": "insert_back",
+                "value": [
+                    {
+                        "icon_element_1": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/1",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.1')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_2": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/2",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.2')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_3": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/3",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.3')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_4": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/4",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.4')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_5": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/5",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.5')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_6": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/6",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.6')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_7": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/7",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.7')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_8": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/8",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.8')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_9": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/9",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.9')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_10": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/10",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.10')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_11": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/11",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.11')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_12": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/12",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.12')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_13": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/13",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.13')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_14": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/14",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.14')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_15": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/15",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.15')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_16": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/16",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.16')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_17": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/17",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.17')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_18": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/18",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.18')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_19": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/19",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.19')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_20": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/20",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.20')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_21": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/21",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.21')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_22": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/22",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.22')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_23": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/23",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.23')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_24": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/24",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.24')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_25": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/25",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.25')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_26": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/26",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.26')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_27": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/27",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.27')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_28": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/28",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.28')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_29": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/29",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.29')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_30": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/30",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.30')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_31": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/31",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.31')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_32": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/32",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.32')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_33": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/33",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.33')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_34": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/34",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.34')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_35": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/35",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.35')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_36": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/36",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.36')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_37": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/37",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.37')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_38": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/38",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.38')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_39": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/39",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.39')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_40": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/40",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.40')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_41": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/41",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.41')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_42": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/42",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.42')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_43": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/43",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.43')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_44": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/44",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.44')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_45": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/45",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.45')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_46": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/46",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.46')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_47": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/47",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.47')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_48": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/48",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.48')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_49": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/49",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.49')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_50": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/50",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.50')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_51": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/51",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.51')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_52": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/52",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.52')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_53": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/53",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.53')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_54": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/54",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.54')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_55": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/55",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.55')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_56": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/56",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.56')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_57": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/57",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.57')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_58": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/58",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.58')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_59": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/59",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.59')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_60": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/60",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.60')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_61": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/61",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.61')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_62": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/62",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.62')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_63": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/63",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.63')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_64": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/64",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.64')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_65": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/65",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.65')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_66": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/66",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.66')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_67": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/67",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.67')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_68": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/68",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.68')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_69": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/69",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.69')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_70": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/70",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.70')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_71": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/71",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.71')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "icon_element_72": {
+                            "type": "image",
+                            "size": [
+                                "256px",
+                                "256px"
+                            ],
+                            "layer": 10,
+                            "texture": "textures/death/72",
+                            "bindings": [
+                                {
+                                    "binding_type": "global",
+                                    "binding_name": "#hud_title_text_string",
+                                    "binding_name_override": "#text"
+                                },
+                                {
+                                    "binding_type": "view",
+                                    "source_property_name": "(#text = '!animate.death.72')",
+                                    "target_property_name": "#visible"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
