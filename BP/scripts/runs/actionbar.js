@@ -1,6 +1,6 @@
 import { world, system } from '@minecraft/server';
+import { sendMessage, playerLimit } from './run';
 import { installSave } from './install';
-import { sendMessage } from './run';
 
 system.runInterval(() => {
 
@@ -21,9 +21,12 @@ system.runInterval(() => {
             const combat = (playerSave?.combatlog - Date.now()) / 1000
 
             if (combat <= 0.500) {
-                sendMessage('Du bist wider sicher, der Kampf ist vorbei.', { name: player.name })
+
+                sendMessage('Du bist wieder sicher, der Kampf ist vorbei.', { name: player.name })
                 playerSave.combatlog = 'xxx';
                 world.setDynamicProperty('heldenSave', JSON.stringify(heldenSave));
+
+                delete playerLimit[player.name]
             }
 
             if (combat >= 0.500) {

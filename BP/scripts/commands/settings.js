@@ -17,11 +17,11 @@ export function settings(senders) {
             setts = heldenSave.settings
         }
 
-        const settings = new ActionFormData();
-
-        settings.title('§l§6Einstellungen');
-        settings.button('Toggles', 'textures/ui/multi_toggle');
-        settings.button('Limit', 'textures/ui/limit')
+        const settings = new ActionFormData()
+            .title('§l§6Einstellungen')
+            .button('Toggles', 'textures/ui/multi_toggle')
+            .button('Limit', 'textures/ui/limit')
+            .button('Duel', 'textures/ui/cross_sword')
 
         settings.show(sender).then((r) => {
 
@@ -71,9 +71,9 @@ export function settings(senders) {
 
                 limit.title('§l§6Limit');
                 limit.toggle('Spinnennetz', { defaultValue: setts?.web_limitEna ?? true });
-                limit.textField('Spinnennetz', '', { defaultValue: String(setts?.web_limit) ?? '64' });
+                limit.textField('Spinnennetz', '', { defaultValue: String(setts?.web_limit ?? '64') });
                 limit.toggle('Enderperle', { defaultValue: setts?.pearl_limitEna ?? true });
-                limit.textField('Enderperle', '', { defaultValue: String(setts?.pearl_limit) ?? '16' });
+                limit.textField('Enderperle', '', { defaultValue: String(setts?.pearl_limit ?? '16') });
                 limit.show(sender).then((r) => {
 
                     if (r.canceled) return;

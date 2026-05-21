@@ -16,7 +16,7 @@ world.afterEvents.playerPlaceBlock.subscribe(({ player, block }) => {
             playerLimit[player.name]['web'] ??= setts?.web_limit ?? 64
             playerLimit[player.name]['web']--
 
-            sendMessage(`[§bHelden§r] §7Spinnennetze übrig: §b${playerLimit[player.name]['web']}`, { name: player.name });
+            sendMessage(`§7Spinnennetze übrig: §b${playerLimit[player.name]['web']}`, { name: player.name });
         }
     }
 });
@@ -39,7 +39,7 @@ world.beforeEvents.playerInteractWithBlock.subscribe((event) => {
 
                 if (playerLimit[player.name]['web'] <= 0) {
 
-                    sendMessage('[§bHelden§r] §cKeine Enderperlen mehr übrig!', { name: player.name })
+                    sendMessage('§cKeine Enderperlen mehr übrig!', { name: player.name })
                     event.cancel = true;
                 }
             }

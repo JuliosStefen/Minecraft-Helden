@@ -10,7 +10,7 @@ system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
     customCommandRegistry.registerCommand({
         name: 'helden:hearth',
         description: 'Legt die Herzen eines spielers fest',
-        permissionLevel: 2,
+        permissionLevel: 1,
         mandatoryParameters: [
             { type: CustomCommandParamType.String, name: 'Name' }
         ],
@@ -22,13 +22,13 @@ system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
     customCommandRegistry.registerCommand({
         name: 'helden:settings',
         description: 'Öffnet die Helden Einstellungen',
-        permissionLevel: 2
+        permissionLevel: 1
     }, settings);
 
     customCommandRegistry.registerCommand({
         name: 'helden:linkhearth',
         description: 'Setzt linkheart',
-        permissionLevel: 2,
+        permissionLevel: 1,
         mandatoryParameters: [
             { type: CustomCommandParamType.String, name: 'Name 1' },
             { type: CustomCommandParamType.String, name: 'Name 2' }

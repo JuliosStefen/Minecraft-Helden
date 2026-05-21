@@ -1,0 +1,130 @@
+{
+	"format_version": "1.20.80",
+	"minecraft:entity": {
+		"description": {
+			"spawn_category": "creature",
+			"identifier": "helden:dummy",
+			"is_summonable": true
+		},
+		"component_groups": {
+			"helden:keepInventory_true": {
+				"minecraft:experience_reward": {
+					"on_death": 0
+				},
+				"minecraft:inventory": {
+					"container_type": "inventory",
+					"inventory_size": 41,
+					"private": true
+				}
+			},
+			"helden:keepInventory_false": {
+				"minecraft:experience_reward": {
+					"on_death": 50
+				},
+				"minecraft:inventory": {
+					"container_type": "inventory",
+					"inventory_size": 41,
+					"restrict_to_owner": true
+				}
+			}
+		},
+		"components": {
+			"minecraft:inventory": {
+				"container_type": "inventory",
+				"inventory_size": 41,
+				"restrict_to_owner": true
+			},
+			"minecraft:equipment": {
+				"slot_drop_chance": [
+					{
+						"slot": "slot.armor.head",
+						"drop_chance": 0
+					},
+					{
+						"slot": "slot.armor.chest",
+						"drop_chance": 0
+					},
+					{
+						"slot": "slot.armor.legs",
+						"drop_chance": 0
+					},
+					{
+						"slot": "slot.armor.feet",
+						"drop_chance": 0
+					}
+				]
+			},
+			"minecraft:nameable": {
+				"always_show": true,
+				"allow_name_tag_renaming": false
+			},
+			"minecraft:type_family": {
+				"family": [
+					"player"
+				]
+			},
+			"minecraft:collision_box": {
+				"width": 0.6,
+				"height": 1.8
+			},
+			"minecraft:health": {
+				"max": 20
+			},
+			"minecraft:breathable": {
+				"total_supply": 15,
+				"suffocate_time": -1,
+				"inhale_time": 3.75,
+				"generates_bubbles": false
+			},
+			"minecraft:hurt_on_condition": {
+				"damage_conditions": [
+					{
+						"filters": {
+							"test": "in_lava",
+							"subject": "self",
+							"operator": "==",
+							"value": true
+						},
+						"cause": "lava",
+						"damage_per_tick": 4
+					}
+				]
+			},
+			"minecraft:behavior.look_at_player": {
+				"priority": 7,
+				"look_distance": 6,
+				"probability": 0.02
+			},
+			"minecraft:behavior.random_look_around": {
+				"priority": 7
+			},
+			"minecraft:physics": {}
+		},
+		"events": {
+			"helden:keepInventory_true": {
+				"add": {
+					"component_groups": [
+						"helden:keepInventory_true"
+					]
+				},
+				"remove": {
+					"component_groups": [
+						"helden:keepInventory_false"
+					]
+				}
+			},
+			"helden:keepInventory_false": {
+				"add": {
+					"component_groups": [
+						"helden:keepInventory_false"
+					]
+				},
+				"remove": {
+					"component_groups": [
+						"helden:keepInventory_true"
+					]
+				}
+			}
+		}
+	}
+}

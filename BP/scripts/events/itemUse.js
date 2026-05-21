@@ -44,7 +44,7 @@ world.beforeEvents.itemUse.subscribe((event) => {
 
                 if (playerLimit[source.name]['pearl'] <= 0) {
 
-                    sendMessage('[§bHelden§r] §cKeine Enderperlen mehr übrig!', { name: source.name })
+                    sendMessage('§cKeine Enderperlen mehr übrig!', { name: source.name })
                     event.cancel = true;
                 }
 
@@ -53,7 +53,7 @@ world.beforeEvents.itemUse.subscribe((event) => {
                     cooldown[source.name] = Date.now();
                     playerLimit[source.name]['pearl']--
 
-                    sendMessage(`[§bHelden§r] §7Enderperlen übrig: §b${playerLimit[source.name]['pearl']}`, { name: source.name });
+                    sendMessage(`§7Enderperlen übrig: §b${playerLimit[source.name]['pearl']}`, { name: source.name });
                 }
             }
         }

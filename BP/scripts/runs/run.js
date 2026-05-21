@@ -29,6 +29,20 @@ export function sendMessage(translate, { withs = [], name } = {}) {
     })
 }
 
+export function loadId(nr = 15) {
+
+    let id = '';
+
+    const wert = 'aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0123456789';
+
+    for (let s = 0; s <= nr; s++) {
+
+        id += wert[Math.round(Math.random() * wert.length)];
+    }
+
+    return id;
+}
+
 export function setLinkHearth(player, partner) {
 
     system.run(() => {
@@ -55,8 +69,10 @@ export function setLinkHearth(player, partner) {
 }
 
 export function lockArmor(name, mode) {
+
     system.run(() => {
         for (const player of world.getPlayers()) {
+
             if (player.name === name) {
 
                 const head = player.getComponent('equippable').getEquipment('Head');
