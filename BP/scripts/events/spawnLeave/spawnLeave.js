@@ -1,9 +1,10 @@
+import { setNameTag, randomLink } from '../../runs/run';
 import { world, system } from '@minecraft/server';
-
-import { stopDeath } from '../../function/deathAnimation';
 import { installPlayer } from '../../runs/install';
-import { setNameTag } from '../../runs/run';
+import { setLinkheart } from '../../function/setLinkheart';
 import { spawnDummy } from './spawnDummy';
+import { heldenSave } from '../../function/heldenSave';
+import { stopDeath } from '../../function/deathAnimation';
 import { synDummy } from './synDummy';
 
 world.afterEvents.playerSpawn.subscribe(({ initialSpawn, player }) => {
@@ -12,18 +13,25 @@ world.afterEvents.playerSpawn.subscribe(({ initialSpawn, player }) => {
 
         stopDeath(player);
 
+        const playerSave = heldenSave().player[player.name]
+
+        if (playerSave?.banbydeath == false && playerSave.heart <= 0) {
+
+            player.setGameMode('Spectator');
+        }
+
         if (initialSpawn) {
 
             installPlayer(player.name);
             setNameTag(player.name);
             synDummy(player);
 
-            player.sendMessage(`§bWillkommen bei Minecraft §lHelden!§r
-        
-§ivon JuliosStefen & Arian
-§6Bugs Melden: §1https://discord.gg/vSf4WSQRfm`);
+            if (playerSave?.linkheart == undefined) {
 
-            player.sendMessage(`\n§l§6!!! §cAchtung §6!!!§r\n§cDiese Version befindet sich noch in der entwicklung und kann fehler enthalten. Diese Version sollte nur zum testen verwendet werden und nicht für öffentliche Projekte!`)
+                randomLink[player.name] = player.name
+            }
+
+            player.sendMessage({ translate: 'helden.helden.willkommen' });
         }
     })
 })
@@ -32,12 +40,39 @@ export let inventory = {}
 
 world.beforeEvents.playerLeave.subscribe(({ player }) => {
 
-    const heldenSave = JSON.parse(world.getDynamicProperty('heldenSave'));
-    const playerSave = heldenSave.player[player.name]
+    const playerSave = heldenSave().player[player.name]
 
-    inventory[player.name] = []
+    stopDeath(player);
+
+    if (world.getPlayers().length <= 2) {
+
+        const loadLinks = system.runInterval(() => {
+
+            const linkLength = Object.values(randomLink).length
+
+            if (linkLength >= 2) {
+
+                const partner1 = Object.values(randomLink)[Math.floor(Math.random() * linkLength)]
+                const partner2 = Object.values(randomLink)[Math.floor(Math.random() * linkLength)]
+
+                if (partner1 !== partner2) {
+
+                    setLinkheart(partner1, partner2);
+
+                    delete randomLink[partner1]
+                    delete randomLink[partner2]
+                }
+
+            } else {
+
+                system.clearRun(loadLinks)
+            }
+        })
+    }
 
     if (playerSave?.combatlog >= 0) {
+
+        inventory[player.name] = []
 
         for (let s = 0; s <= 35; s++) {
             const item = player.getComponent('inventory').container.getItem(s);

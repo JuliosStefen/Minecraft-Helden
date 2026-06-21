@@ -1,27 +1,24 @@
-import { world, system } from '@minecraft/server';
-
 import { timeoutDummy } from '../entityHurt/timeoutDummy';
+import { heldenSave } from '../../function/heldenSave';
 import { inventory } from './spawnLeave';
+import { system } from '@minecraft/server';
 import { loadId } from '../../runs/run';
 
 export function spawnDummy(health, dimension, rx, ry, name, x, y, z) {
 
     system.run(() => {
 
-        const heldenSave = JSON.parse(world.getDynamicProperty('heldenSave'));
-        const playerSave = heldenSave.player[name]
+        const playerSave = heldenSave().player[name]
         const dummyId = loadId(50);
 
         dimension.spawnEntity('helden:dummy', { x, y, z }).setDynamicProperty('id', dummyId);
 
-        const entity = dimension.getEntities().find(e => e.getDynamicProperty('id') === dummyId)
+        const entity = dimension.getEntities().find(e => e.getDynamicProperty('id') == dummyId)
 
         if (entity && entity?.typeId === 'helden:dummy') {
 
             playerSave.dummy = {}
             playerSave.dummy.id = dummyId
-
-            world.setDynamicProperty('heldenSave', JSON.stringify(heldenSave));
 
             entity.nameTag = name
             entity.applyDamage(20 - health);

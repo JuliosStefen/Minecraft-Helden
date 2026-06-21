@@ -1,7 +1,9 @@
-import { world } from '@minecraft/server';
 import { dummyIds, dummyId } from '../function/dummyIds';
+import { world } from '@minecraft/server';
 
 world.afterEvents.gameRuleChange.subscribe(({ rule }) => {
+
+    world.gameRules.showDeathMessages = false;
 
     if (rule == 'keepInventory') {
 

@@ -1,8 +1,9 @@
 import './entityHurt/entityHurt';
 import './spawnLeave/spawnLeave';
-import './entityDie/entityDie';
 import './dimensionChange';
 import './gameRuleChange';
 import './InteractPlace';
+import './playerJoin';
 import './spawnLoad';
+import './entityDie';
 import './itemUse';

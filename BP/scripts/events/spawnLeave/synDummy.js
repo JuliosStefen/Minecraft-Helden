@@ -1,12 +1,12 @@
 import { world, system } from '@minecraft/server';
+import { heldenSave } from '../../function/heldenSave';
 import { dummyId } from '../../function/dummyIds';
 
 export function synDummy(player) {
 
     system.run(() => {
 
-        const heldenSave = JSON.parse(world.getDynamicProperty('heldenSave'));
-        const dummy = heldenSave.player[player.name]?.dummy
+        const dummy = heldenSave().player[player.name]?.dummy
 
         if (dummy) {
 
@@ -15,15 +15,12 @@ export function synDummy(player) {
             if (entityId !== undefined) {
 
                 const entity = world.getEntity(`${entityId}`);
-
+                const { x, y, z } = entity.location
                 const dimension = entity.dimension
-
-                const x = entity.location.x
-                const y = entity.location.y
-                const z = entity.location.z
 
                 player.teleport({ x, y, z }, { dimension });
 
+                dummyId(entity.nameTag).removeId();
                 entity.remove();
 
             } else {
@@ -33,9 +30,8 @@ export function synDummy(player) {
                     const showParticles = false;
 
                     const wd = world.getDimension('overworld');
-                    const wx = world.getDefaultSpawnLocation().x
-                    const wy = world.getDefaultSpawnLocation().y
-                    const wz = world.getDefaultSpawnLocation().z
+
+                    const { wx, wy, wz } = world.getDefaultSpawnLocation()
 
                     const x = player.getSpawnPoint()?.x || wx
                     const y = player.getSpawnPoint()?.y || wy
@@ -58,18 +54,13 @@ export function synDummy(player) {
 
                 } else {
 
-                    const x = dummy.location.x
-                    const y = dummy.location.y
-                    const z = dummy.location.z
-
+                    const { x, y, z } = dummy.location
                     const dimension = world.getDimension(dummy.dimension);
 
                     player.teleport({ x, y, z }, { dimension });
                 }
 
-                delete heldenSave.player[player.name]?.dummy;
-
-                world.setDynamicProperty('heldenSave', JSON.stringify(heldenSave));
+                delete heldenSave().player[player.name]?.dummy;
             }
         }
     })

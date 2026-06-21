@@ -1,4 +1,5 @@
 import { world, system } from '@minecraft/server';
+import { heldenSave } from '../function/heldenSave';
 import { dummyId } from '../function/dummyIds';
 
 function entityFunktion(entity) {
@@ -7,13 +8,12 @@ function entityFunktion(entity) {
 
         system.run(() => {
 
-            const heldenSave = JSON.parse(world.getDynamicProperty('heldenSave'));
-            const entitySave = heldenSave.player[entity.nameTag]
+            const entitySave = heldenSave().player[entity.nameTag]
 
-            const storedId = entitySave?.dummy.id
+            const savedId = entitySave?.dummy.id
             const entityId = entity?.getDynamicProperty('id')
 
-            if (storedId && entityId && storedId === entityId) {
+            if (savedId && entityId && savedId === entityId) {
 
                 const rule = world.gameRules.keepInventory
 

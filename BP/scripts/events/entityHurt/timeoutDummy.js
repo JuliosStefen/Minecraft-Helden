@@ -1,4 +1,6 @@
-import { system, world } from '@minecraft/server';
+import { heldenSave } from '../../function/heldenSave';
+import { dummyId } from '../../function/dummyIds';
+import { system } from '@minecraft/server';
 
 let dummyDesp = {}
 
@@ -6,8 +8,7 @@ export function timeoutDummy(entity) {
 
     if (entity.typeId === 'helden:dummy') {
 
-        const heldenSave = JSON.parse(world.getDynamicProperty('heldenSave'));
-        const combatTime = heldenSave.player[entity.nameTag].combatlog - Date.now();
+        const combatTime = heldenSave().player[entity.nameTag]?.combatlog - Date.now();
 
         if (dummyDesp[entity.id]) {
 
@@ -18,8 +19,7 @@ export function timeoutDummy(entity) {
 
             if (entity) {
 
-                const helden = JSON.parse(world.getDynamicProperty('heldenSave'));
-                const dummySave = helden.player[entity.nameTag]
+                const dummySave = heldenSave().player[entity.nameTag]
 
                 const dimension = entity.dimension.id
 
@@ -27,7 +27,7 @@ export function timeoutDummy(entity) {
                 const y = entity.location.y
                 const z = entity.location.z
 
-                dummySave.combatlog = 'xxx';
+                delete dummySave.combatlog
 
                 dummySave.dummy = {
 
@@ -35,8 +35,7 @@ export function timeoutDummy(entity) {
                     dimension
                 }
 
-                world.setDynamicProperty('heldenSave', JSON.stringify(helden));
-
+                dummyId(entity.nameTag).removeId();
                 entity.remove();
             }
 

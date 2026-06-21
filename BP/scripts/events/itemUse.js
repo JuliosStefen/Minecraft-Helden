@@ -1,21 +1,21 @@
-import { world } from '@minecraft/server';
 import { playerLimit, sendMessage } from '../runs/run';
+import { world, system } from '@minecraft/server';
+import { heldenSave } from '../function/heldenSave';
 
 const cooldown = {}
 
 world.beforeEvents.itemUse.subscribe((event) => {
 
-    const heldenSave = JSON.parse(world.getDynamicProperty('heldenSave'));
-    const setts = heldenSave.settings
+    const setts = heldenSave().settings
 
     const itemStack = event.itemStack
     const source = event.source
 
     if (source.typeId === 'minecraft:player') {
 
-        const playerSave = heldenSave.player[source.name];
+        const playerSave = heldenSave().player[source.name];
 
-        if ((setts?.blockTrident === undefined || setts.blockTrident) && playerSave.combatlog >= 0) {
+        if ((setts?.blockTrident === undefined || setts.blockTrident) && playerSave?.combatlog >= 0) {
 
             if (itemStack.typeId === 'minecraft:trident' && source.typeId === 'minecraft:player') {
 
@@ -26,9 +26,62 @@ world.beforeEvents.itemUse.subscribe((event) => {
             }
         }
 
+        if (itemStack.typeId === 'helden:soul_amulet') {
+
+            const playerSave = heldenSave().player[source.name]
+
+            if (playerSave.heart < 4) {
+
+                system.run(() => {
+
+                    const { x, y, z } = source.location
+
+                    world.gameRules.sendCommandFeedback = false;
+
+                    source.runCommand('clear @s helden:soul_amulet 0 1');
+                    source.runCommand('give @s helden:broken_soul_amulet');
+
+                    world.gameRules.sendCommandFeedback = true;
+
+                    source.spawnParticle('helden:heart_plus', { x, y: y + 1, z })
+
+                    source.playSound('shriek.sculk_shrieker');
+                    source.playSound('random.glass');
+
+                    playerSave.heart++
+                })
+            }
+        }
+
+        if (itemStack.typeId === 'helden:broken_soul_amulet') {
+
+            const playerSave = heldenSave().player[source.name]
+
+            if (playerSave.heart > 2) {
+
+                system.run(() => {
+
+                    const { x, y, z } = source.location
+
+                    world.gameRules.sendCommandFeedback = false;
+
+                    source.runCommand('clear @s helden:broken_soul_amulet 0 1');
+                    source.runCommand('give @s helden:soul_amulet');
+
+                    world.gameRules.sendCommandFeedback = true;
+
+                    source.spawnParticle('helden:heart_minus', { x, y: y + 1, z })
+
+                    source.playSound('shriek.sculk_shrieker');
+
+                    playerSave.heart--
+                })
+            }
+        }
+
         if (itemStack?.typeId === 'minecraft:ender_pearl' && (setts?.pearl_limitEna === undefined || setts?.pearl_limitEna)) {
 
-            if (playerSave.combatlog >= 0) {
+            if (playerSave?.combatlog >= 0) {
 
                 playerLimit[source.name] ??= {}
 
@@ -44,7 +97,7 @@ world.beforeEvents.itemUse.subscribe((event) => {
 
                 if (playerLimit[source.name]['pearl'] <= 0) {
 
-                    sendMessage('§cKeine Enderperlen mehr übrig!', { name: source.name })
+                    sendMessage('helden.ItemUse.noCobwebLeft', { name: source.name })
                     event.cancel = true;
                 }
 
@@ -53,7 +106,7 @@ world.beforeEvents.itemUse.subscribe((event) => {
                     cooldown[source.name] = Date.now();
                     playerLimit[source.name]['pearl']--
 
-                    sendMessage(`§7Enderperlen übrig: §b${playerLimit[source.name]['pearl']}`, { name: source.name });
+                    sendMessage('helden.ItemUse.cobwebLeft', { name: source.name, withs: [playerLimit[source.name]['pearl']] });
                 }
             }
         }

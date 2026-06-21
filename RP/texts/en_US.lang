@@ -1,7 +1,102 @@
+## minecraft
 disconnect.kicked.reason=§
-disconnect.kicked=§l§cYou have been kicked
+disconnect.kicked=§l§cYou have been kicked!
 disconnectionScreen.title.kickedFromWorld=§
+## minecraft
 
+## items
 item.helden:soul_stealer=§bSoul Stealer§r
 item.helden:soul_amulet=Soul Amulet
 item.helden:broken_soul_amulet=Broken Soul Amulet
+item.helden:krone=Crown
+## items
+
+## helden
+helden.helden.noOption=§c%s§r is not a valid option
+helden.helden.willkommen=§bWelcome to Minecraft §lHeroes!§r\n\n§iby JuliosStefen & Arian & Lionkracher23\n§6Report Bugs: §1https://discord.gg/vSf4WSQRfm
+## helden
+
+## commands/banbydeath
+helden.banbydeath.false=§6%s§r will no longer be banned upon death
+helden.banbydeath.true=§6%s§r will be banned upon death
+## commands/banbydeath
+
+## commands/duel
+helden.duel.noCombetlog=You cannot start a duel while in combat log
+helden.duel.toManyDuel=You have used up all your duels
+helden.duel.noYouSelf=You cannot challenge yourself
+helden.duel.alreadyReceived=§6%s§r has already received a duel request
+helden.duel.questionStart=You challenged §6%s§r to a duel
+helden.duel.questionStart2=You have been challenged to a duel by §6%s§r
+helden.duel.questionOutdated=Your duel request to §6%s§r has expired
+helden.duel.questionOutdated2=The duel request from §6%s§r has expired
+helden.duel.noQuestion=You have not received a duel request from §6%s§r
+helden.duel.questionAccept=You accepted the duel against §6%s§r
+helden.duel.questionAccept2=§6%s§r accepted your duel request
+helden.duel.questionDenny=You declined the duel against §6%s§r
+helden.duel.questionDenny2=§6%s§r declined your duel request
+helden.duel.noAktive=Duels are disabled
+## commands/duel
+
+## commands/heart
+helden.heart.noLinkheart=§cLink Hearts are disabled
+helden.heart.haveHeart=§6%s§r has §6%s§r hearts
+helden.heart.noExis=§6%s§r does not exist
+helden.heart.setHeart=The hearts of §6%s§r have been set to §6%s§r
+helden.heart.noExist=§6%s§r does not exist
+helden.heart.allowedOption=§cOnly numbers from 0 to 4 are allowed
+## commands/heart
+
+## commands/linkheart
+helden.linkheart.twoNamesNeed=Enter at least two names
+helden.linkheart.linkedNames=§6%s§r has been linked with §6%s§r
+helden.linkheart.haveLink=§6%s§r and §6%s§r already have a Link Heart
+helden.linkheart.haveLink1=§6%s§r already has a Link Heart
+helden.linkheart.linkRemove=§6%s§r and §6%s§r are no longer linked
+helden.linkheart.neverLinked=§6%s§r and §6%s§r have never been linked
+helden.linkheart.enabled=The Link Heart of §6%s§r has been enabled
+helden.linkheart.noEnabled=The Link Heart of §6%s§r could not be enabled
+helden.linkheart.disanabled=The Link Heart of §6%s§r has been disabled
+helden.linkheart.noDisanabled=The Link Heart of §6%s§r could not be disabled
+helden.linkheart.noLink=§6%s§r does not have a Link Heart
+helden.linkheart.linkNoEnabled=The Link Heart of §6%s§r is disabled
+helden.linkheart.linkedWhite=§6%s§r is linked with §6%s§r
+## commands/linkheart
+
+## commands/settings
+helden.settings.updates=Settings updated
+helden.settings.removeLinkheart=Link Hearts removed
+helden.settings.removeHeart=Hearts removed
+helden.settings.removeDuel=Duels removed
+helden.settings.removePlayer=Player data deleted
+helden.settings.removeSettings=Settings deleted
+helden.settings.removeAll=All data has been deleted
+## commands/settings
+
+## events/entityHurt/entityHurt
+helden.entityHurt.attacked=You attacked §6%s§r
+helden.entityHurt.attacked2=You were attacked by §6%s§r
+## events/entityHurt/entityHurt
+
+## events/entityDie
+helden.entityDie.winDuel=§6%s§r won a duel against §6%s§r
+## events/entityDie
+
+## events/InteractPlace
+helden.InteractPlace.cobwebLeft=§7Cobwebs remaining: §b%s
+helden.InteractPlace.noCobwebLeft=§cNo cobwebs remaining!
+## events/InteractPlace
+
+## events/ItemUse
+helden.ItemUse.noCobwebLeft=§cNo Ender Pearls remaining!
+helden.ItemUse.cobwebLeft=§7Ender Pearls remaining: §b%s
+## events/ItemUse
+
+## function/duel
+helden.duel.InaktivitiEnd=The duel has ended due to inactivity
+## function/duel
+
+## runs/actionbar
+helden.actionbar.combatEnd=You are safe again, the fight is over.
+helden.actionbar.combatScreen=§cIn Combat! §i(%ss remaining)
+## runs/actionbar

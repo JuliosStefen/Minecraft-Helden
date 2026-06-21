@@ -14,13 +14,13 @@ export function playDeath(player) {
             player.runCommand('camera @s fade time 0 0.25 1 color 0 0 0');
             player.runCommand(`title @s title !animate.death.${i}`);
 
-        }, i * 20);
+        }, i * 0.2);
     }
 
     ani[player.name][73] = system.runTimeout(() => {
 
         stopDeath(player);
-    }, (73) * 20);
+    }, (73) * 0.2);
 }
 
 export function stopDeath(player) {

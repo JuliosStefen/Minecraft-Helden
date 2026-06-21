@@ -1,3 +1,102 @@
+## minecraft
 disconnect.kicked.reason=§
 disconnect.kicked=§l§cDu wurdest gekickt
 disconnectionScreen.title.kickedFromWorld=§
+## minecraft
+
+## items
+item.helden:soul_stealer=§bSeelen Stehler§r
+item.helden:soul_amulet=Seelen Amulet
+item.helden:broken_soul_amulet=Kaputtes Seelen Amulet
+item.helden:krone=Krone
+## items
+
+## helden
+helden.helden.noOption=§c%s§r ist keine gültige Option
+helden.helden.willkommen=§bWillkommen bei Minecraft §lHelden!§r\n\n§ivon JuliosStefen & Arian & Lionkracher23\n§6Bugs Melden: §1https://discord.gg/vSf4WSQRfm
+## helden
+
+## commands/banbydeath
+helden.banbydeath.false=§6%s§r wird nicht mehr nach dem Tod gebannt!
+helden.banbydeath.true=§6%s§r wird nach dem Tod gebannt!
+## commands/banbydeath
+
+## commands/duel
+helden.duel.noCombetlog=Du kannst im Combatlog kein Duell starten!
+helden.duel.toManyDuel=Du hast alle Duelle aufgebraucht!
+helden.duel.noYouSelf=Du kannst dich nicht selbst herausfordern!
+helden.duel.alreadyReceived=§6%s§r hat bereits eine Duell anfrage erhalten!
+helden.duel.questionStart=Du hast §6%s§r zu einem Duell herausgefordert!
+helden.duel.questionStart2=Du wurdest von §6%s§r zu ein Duel herausgefordert!
+helden.duel.questionOutdated=Deine Duelanfrage an §6%s§r ist angelaufen!
+helden.duel.questionOutdated2=Die Duelanfrage von §6%s§r ist abgelaufen!
+helden.duel.noQuestion=Du hast keine anfrage von §6%s§r zu einen Duell erhalten!
+helden.duel.questionAccept=Du hast das Duell gegen §6%s§r angenommen!
+helden.duel.questionAccept2=§6%s§r hat deine Duell anfrage angenommen!
+helden.duel.questionDenny=Du hast das Duell gegen §6%s§r abgelehnt!
+helden.duel.questionDenny2=§6%s§r hat deine Duell anfrage abgelehnt!
+helden.duel.noAktive=Duelle sind Deaktiviert!
+## commands/duel
+
+## commands/heart
+helden.heart.noLinkheart=§cLinkhearts sind deaktiviert
+helden.heart.haveHeart=§6%s§r hat §6%s§r Herzen
+helden.heart.noExis=§6%s§r exestiert nicht
+helden.heart.setHeart=Die Herzen von §6%s§r wurden auf §6%s§r gesetzt!
+helden.heart.noExist=§6%s§r exestiert nicht!
+helden.heart.allowedOption=§cEs sind nur die Zahlen von 0 - 4 Erlaubt!
+## commands/heart
+
+## commands/linkheart
+helden.linkheart.twoNamesNeed=Gebe mindestens zwei Namen an!
+helden.linkheart.linkedNames=§6%s§r wurde mit §6%s§r verlinkt!
+helden.linkheart.haveLink=§6$%s§r und §6%s§r haben bereits ein Linkheart!
+helden.linkheart.haveLink1=§6%s§r wurde bereits verlinkt!
+helden.linkheart.linkRemove=§6%s§r und §6%s§r sind nicht mehr verlinkt!
+helden.linkheart.neverLinked=§6%s§r und §6%s§r waren noch nie verlinkt!
+helden.linkheart.enabled=Das Linkheart von §6%s§r wurde aktiviert!
+helden.linkheart.noEnabled=Das Linkheart von §6%s§r konnte nicht aktiviert werden!
+helden.linkheart.disanabled=Das Linkheart von §6%s§r wurde deaktiviert!
+helden.linkheart.noDisanabled=Das Linkheart von §6%s§r konnte nicht deaktiviert werden!
+helden.linkheart.noLink=§6%s§r hat kein Linkheart!
+helden.linkheart.linkNoEnabled=Linkheart von §6%s§r ist deaktiviert!
+helden.linkheart.linkedWhite=§6%s§r ist mit §6%s§r verlinkt!
+## commands/linkheart
+
+## commands/settings
+helden.settings.updates=Einstellungen aktualisiert
+helden.settings.removeLinkheart=Linkhearts gelöscht
+helden.settings.removeHeart=Herzen gelöscht
+helden.settings.removeDuel=Duelle gelöscht
+helden.settings.removePlayer=Spielerdaten gelöscht
+helden.settings.removeSettings=Einstellungen gelöscht
+helden.settings.removeAll=Alle Daten wurden gelöscht
+## commands/settings
+
+## events/entityHurt/entityHurt
+helden.entityHurt.attacked=Du hast §6%s§r angegriffen
+helden.entityHurt.attacked2=Du wurdest von §6%s§r angegriffen
+## events/entityHurt/entityHurt
+
+## events/entityDie
+helden.entityDie.winDuel=§6%s§r hat das Duell gegen §6%s§r gewonnen!
+## events/entityDie
+
+## events/InteractPlace
+helden.InteractPlace.cobwebLeft=§7Spinnennetze übrig: §b%s
+helden.InteractPlace.noCobwebLeft=§cKeine Spinnennetze mehr übrig!
+## events/InteractPlace
+
+## events/ItemUse
+helden.ItemUse.noCobwebLeft=§cKeine Enderperlen mehr übrig!
+helden.ItemUse.cobwebLeft=§7Enderperlen übrig: §b%s
+## events/ItemUse
+
+## function/duel
+helden.duel.InaktivitiEnd=Das Duell wurde wegen inaktivität beendet!
+## function/duel
+
+## runs/actionbar
+helden.actionbar.combatEnd=Du bist wieder sicher, der Kampf ist vorbei!
+helden.actionbar.combatScreen=§cIm Kampf! §i(%ss übrig)
+## runs/actionbar

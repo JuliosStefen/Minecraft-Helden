@@ -1,0 +1,116 @@
+{
+	"format_version": "1.16.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.krone",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [
+					0,
+					1.25,
+					0
+				]
+			},
+			"bones": [
+				{
+					"name": "root_item",
+					"pivot": [
+						0,
+						1,
+						0
+					]
+				},
+				{
+					"name": "krone",
+					"parent": "root_item",
+					"pivot": [
+						0,
+						1,
+						0
+					],
+					"binding": "'head'",
+					"cubes": [
+						{
+							"origin": [
+								-4,
+								1,
+								-4
+							],
+							"size": [
+								8,
+								6,
+								8
+							],
+							"inflate": 1,
+							"uv": {
+								"north": {
+									"uv": [
+										10,
+										1
+									],
+									"uv_size": [
+										20,
+										15
+									]
+								},
+								"east": {
+									"uv": [
+										10,
+										1
+									],
+									"uv_size": [
+										20,
+										15
+									]
+								},
+								"south": {
+									"uv": [
+										10,
+										1
+									],
+									"uv_size": [
+										20,
+										15
+									]
+								},
+								"west": {
+									"uv": [
+										10,
+										1
+									],
+									"uv_size": [
+										20,
+										15
+									]
+								},
+								"up": {
+									"uv": [
+										0,
+										0
+									],
+									"uv_size": [
+										8,
+										8
+									]
+								},
+								"down": {
+									"uv": [
+										0,
+										23
+									],
+									"uv_size": [
+										8,
+										-8
+									]
+								}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,19 +1,49 @@
 import { world, system } from '@minecraft/server';
-import { installSave, installPlayer } from './install.js';
-
-installSave();
+import { installSave } from './install.js';
+import { heldenSave } from '../function/heldenSave';
 
 import '../commands/registry';
 import '../events/event';
 import './actionbar';
 
-export let playerLimit = {}
+installSave();
+
+system.run(() => {
+
+    const setts = heldenSave().settings
+
+    // world.gameRules.showDeathMessages = false;
+
+    if (setts.debug == true) {
+
+        world.sendMessage(`§l§6Temp: §r§a${JSON.stringify(heldenSave())}\n\n`);
+        world.sendMessage(`§l§6Save: §r§a${world.getDynamicProperty('heldenSave')}\n\n`);
+    }
+
+    world.getPlayers().forEach((player) => {
+
+        const playerSave = heldenSave().player[player.name]
+
+        if (playerSave?.linkheart == undefined) {
+
+            randomLink[player.name] = player.name
+        }
+    })
+})
+
+export let playerLimit = {}, randomLink = {}
+
+export const banReason = '§l[§bMCHelden§r§l]§r\n\nDu hast alle Herzen verloren und bist damit aus dem\nProjekt §l§causgeschieden!'
 
 export function sendMessage(translate, { withs = [], name } = {}) {
 
     system.run(() => {
 
-        const message = { rawtext: [{ text: '[§bHelden§r] ' }, { translate, with: [...withs] }] }
+        let withss = []
+
+        for (const one of withs) { withss.push(String(one)) }
+
+        const message = { rawtext: [{ text: '[§bHelden§r] ' }, { translate, with: withss }] }
 
         if (name === undefined) {
 
@@ -43,34 +73,10 @@ export function loadId(nr = 15) {
     return id;
 }
 
-export function setLinkHearth(player, partner) {
-
-    system.run(() => {
-
-        const heldenSave = JSON.parse(world.getDynamicProperty('heldenSave'));
-
-        heldenSave.player[partner] ??= {}
-        heldenSave.player[player] ??= {}
-
-        const partnerSave = heldenSave.player?.[partner]
-        const playerSave = heldenSave.player?.[player]
-
-        if (!partnerSave?.linkhearth && !playerSave?.linkhearth) {
-
-            playerSave.linkhearth = partner
-            partnerSave.linkhearth = player
-
-            world.setDynamicProperty('heldenSave', JSON.stringify(heldenSave));
-
-            installPlayer(player)
-            installPlayer(partner)
-        }
-    })
-}
-
 export function lockArmor(name, mode) {
 
     system.run(() => {
+
         for (const player of world.getPlayers()) {
 
             if (player.name === name) {
@@ -101,35 +107,52 @@ export function setNameTag(name) {
 
     system.run(() => {
 
-        const heldenSave = JSON.parse(world.getDynamicProperty('heldenSave'));
-        const playerSave = heldenSave.player[name]
-        const setts = heldenSave.settings
+        const playerSave = heldenSave().player[name]
+        const setts = heldenSave().settings
+
+        const c = setts?.heartColor ?? 0
+
+        const h1 = String.fromCharCode(0xE200 + c * 16 + 3);
+        const h2 = String.fromCharCode(0xE200 + c * 16 + 2);
+
+        const show = String.fromCharCode(0xE200 + c * 16);
+        const hide = String.fromCharCode(0xE201);
 
         for (const player of world.getPlayers().filter(r => r.name === name)) {
 
-            if (!setts?.showOtherHearth) {
+            if (!setts?.showOtherheart) {
 
                 player.nameTag = player.name
 
-            } else if (setts?.showOtherHearth) {
+            } else if (setts?.showOtherheart) {
 
                 let nameTag;
-                const linkhearth = playerSave?.linkhearth ?? '§cKein link'
+                const linkheart = playerSave?.linkheart ?? '§cKein link'
 
-                if (playerSave.hearth === 4) {
-                    nameTag = '\uE200\uE200\uE200';
-                } else if (playerSave.hearth === 3) {
-                    nameTag = '\uE200\uE200\uE201';
-                } else if (playerSave.hearth === 2) {
-                    nameTag = '\uE200\uE201\uE201';
-                } else if (playerSave.hearth === 1) {
-                    nameTag = `\uE203 ${linkhearth} \uE202`;
-                } else if (playerSave.hearth === 0) {
-                    nameTag = '\uE205\uE204';
+                switch (playerSave.heart) {
+                    case 4: {
+                        nameTag = show + show + show
+                        break;
+                    }
+                    case 3: {
+                        nameTag = show + show + hide
+                        break;
+                    }
+                    case 2: {
+                        nameTag = show + hide + hide
+                        break;
+                    }
+                    case 1: {
+                        nameTag = `${h1} ${linkheart} ${h2}`
+                        break;
+                    }
+                    case 0: {
+                        nameTag = '\uE205\uE204'
+                        break;
+                    }
                 }
 
                 player.nameTag = `${player.name}\n${nameTag}`
-
             }
         }
     })

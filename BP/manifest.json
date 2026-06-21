@@ -1,7 +1,7 @@
 {
 	"format_version": 2,
 	"header": {
-		"name": "Minecraft helden §c(alpha)§r",
+		"name": "Minecraft helden",
 		"description": "das minecraft helden addon wurde nach dem Orginalen Minecraft helden Projekt entworfen\n\n§ierstelt von JuliosStefen\n§r§bBugs Melden: https://discord.gg/vSf4WSQRfm",
 		"min_engine_version": [
 			1,
@@ -11,7 +11,7 @@
 		"uuid": "a46bee50-ea85-4f58-b98e-568bb4349354",
 		"version": [
 			2,
-			1,
+			2,
 			0
 		]
 	},
@@ -21,7 +21,7 @@
 			"uuid": "903f0264-509e-4cc9-b67a-089402547adb",
 			"version": [
 				2,
-				1,
+				2,
 				0
 			]
 		},
@@ -32,7 +32,7 @@
 			"entry": "scripts/runs/run.js",
 			"version": [
 				2,
-				1,
+				2,
 				0
 			]
 		}
@@ -42,17 +42,17 @@
 			"uuid": "39cad169-6d65-4fb3-9017-ec5e592a0023",
 			"version": [
 				2,
-				1,
+				2,
 				0
 			]
 		},
 		{
 			"module_name": "@minecraft/server",
-			"version": "2.6.0"
+			"version": "2.8.0"
 		},
 		{
 			"module_name": "@minecraft/server-ui",
-			"version": "2.0.0"
+			"version": "2.1.0"
 		}
 	],
 	"metadata": {

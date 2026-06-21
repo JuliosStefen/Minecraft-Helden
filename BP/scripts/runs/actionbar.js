@@ -1,51 +1,48 @@
-import { world, system } from '@minecraft/server';
 import { sendMessage, playerLimit } from './run';
-import { installSave } from './install';
+import { heldenSave } from '../function/heldenSave';
+import { world, system } from '@minecraft/server';
+import { aktiveDuel } from '../function/duel';
 
 system.runInterval(() => {
 
-    if (!world.getDynamicProperty('heldenSave')) {
+    world.getPlayers().forEach(player => {
 
-        installSave()
-        return;
-    }
-
-    const heldenSave = JSON.parse(world.getDynamicProperty('heldenSave'));
-
-    for (const player of world.getPlayers()) {
-
-        const playerSave = heldenSave.player?.[player.name]
+        const playerSave = heldenSave().player?.[player.name]
 
         if (playerSave) {
 
+            const screen = player.onScreenDisplay
             const combat = (playerSave?.combatlog - Date.now()) / 1000
 
             if (combat <= 0.500) {
 
-                sendMessage('Du bist wieder sicher, der Kampf ist vorbei.', { name: player.name })
-                playerSave.combatlog = 'xxx';
-                world.setDynamicProperty('heldenSave', JSON.stringify(heldenSave));
+                sendMessage('helden.actionbar.combatEnd', { name: player.name })
 
+                delete playerSave.combatlog
                 delete playerLimit[player.name]
             }
 
             if (combat >= 0.500) {
 
-                player.runCommand(`title @s actionbar §cIm Kampf! §i(${Math.floor(combat)}s übrig)`);
+                screen.setActionBar({ translate: 'helden.actionbar.combatScreen', with: [`${Math.floor(combat)}`] })
 
             } else {
 
                 let health;
 
-                const c = heldenSave.settings?.hearthColor ?? 0
-                const h = playerSave.hearth - 2
+                const c = heldenSave().settings?.heartColor ?? 0
+                let h = playerSave.heart - 2
 
-                if (playerSave.hearth >= 2) { health = `\n${String.fromCharCode(0xE300 + c * 16 + h)}` }
-                if (playerSave.hearth === 1) { health = `\uE203 §b${playerSave?.linkhearth ?? '§cKein Link'} \uE202` }
-                if (playerSave.hearth <= 0) { health = `\n\uE205\uE204` }
+                const h1 = String.fromCharCode(0xE200 + c * 16 + 3);
+                const h2 = String.fromCharCode(0xE200 + c * 16 + 2);
 
-                player.runCommand(`titleraw @s actionbar {"rawtext":[{"text":"\n\n${health}"}]}`);
+                if (aktiveDuel[player.name]) h += 3
+                if (playerSave.heart >= 2) { health = `\n${String.fromCharCode(0xE300 + c * 16 + h)}` }
+                if (playerSave.heart === 1) { health = `${h1} §b${playerSave?.linkheart || '§cKein Link'} ${h2}` }
+                if (playerSave.heart <= 0) { health = `\n\uE205\uE204` }
+
+                screen.setActionBar(`\n\n${health}`);
             }
         }
-    }
+    })
 }, 5)

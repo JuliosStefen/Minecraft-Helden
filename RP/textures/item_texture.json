@@ -8,6 +8,9 @@
 		},
 		"broken_soul_amulet": {
 			"textures": "textures/items/broken_soul_amulet"
+		},
+		"krone": {
+			"textures": "textures/items/krone"
 		}
 	}
 }
