@@ -9,6 +9,9 @@ world.afterEvents.entityDie.subscribe(({ deadEntity, damageSource }) => {
 
     system.run(() => {
 
+        const damager = damageSource?.damagingEntity
+        const mainHand = damager?.getComponent('equippable').getEquipment('Mainhand');
+
         if (deadEntity.typeId === 'helden:dummy') {
 
             const dummySave = heldenSave().player[deadEntity.nameTag]
@@ -23,7 +26,6 @@ world.afterEvents.entityDie.subscribe(({ deadEntity, damageSource }) => {
         if (deadEntity.typeId === 'minecraft:player') {
 
             const deadSave = heldenSave().player[deadEntity.name]
-            const damager = damageSource?.damagingEntity
 
             if (aktiveDuel[deadEntity.name]) {
 
@@ -43,22 +45,30 @@ world.afterEvents.entityDie.subscribe(({ deadEntity, damageSource }) => {
 
                 if (setts?.loastHeart == undefined || setts?.loastHeart) {
 
-                    if (deadSave?.combatlog >= 0.500) {
+                    if (deadSave?.combatlog >= 0.500 || damager?.typeId === 'minecraft:player') {
+
+                        if (mainHand?.nameTag) {
+
+                            sendMessage('helden.entityDie.killedFromWhite', { withs: [deadEntity.name, damager.name, mainHand.nameTag] });
+
+                        } else {
+
+                            if (damager?.name) {
+
+                                sendMessage('helden.entityDie.killedFrom', { withs: [deadEntity.name, damager.name] });
+
+                            } else {
+
+                                sendMessage('helden.entityDie.die', { withs: [deadEntity.name] });
+                            }
+                        }
 
                         setHeart(deadEntity.name, (deadSave.heart - 1))
                         playDeath(deadEntity);
-                        delete playerSave.combatlog
-                        return;
-                    }
-
-                    if (damager?.typeId === 'minecraft:player') {
-
-                        setHeart(deadEntity.name, (deadSave.heart - 1))
-                        playDeath(deadEntity);
-                        delete playerSave.combatlog
-                        return;
                     }
                 }
+
+                delete playerSave.combatlog
             }
         }
     })

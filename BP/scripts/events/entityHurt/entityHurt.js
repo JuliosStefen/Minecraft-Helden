@@ -15,6 +15,8 @@ world.afterEvents.entityHurt.subscribe(({ damageSource, hurtEntity }) => {
         const hurtSave = heldenSave().player[hurt.name]
         const damageSave = heldenSave().player[damage?.name]
 
+        const setts = heldenSave().settings
+
         if (damage?.typeId === 'minecraft:player') {
 
             const head = damage.getComponent('minecraft:equippable').getEquipment('Head');
@@ -73,31 +75,37 @@ world.afterEvents.entityHurt.subscribe(({ damageSource, hurtEntity }) => {
 
                 } else {
 
-                    if (!damageSave?.combatlog) {
-                        sendMessage('helden.entityHurt.attacked', { name: damage.name, withs: [hurt.name] })
-                    }
+                    if (setts?.loastHeart !== false) {
 
-                    if (!hurtSave?.combatlog) {
-                        sendMessage('helden.entityHurt.attacked2', { name: hurt.name, withs: [damage.name] })
-                    }
+                        if (!damageSave?.combatlog) {
+                            sendMessage('helden.entityHurt.attacked', { name: damage.name, withs: [hurt.name] })
+                        }
 
-                    setCombat(damage.name, damage);
-                    setCombat(hurt.name, hurt);
+                        if (!hurtSave?.combatlog) {
+                            sendMessage('helden.entityHurt.attacked2', { name: hurt.name, withs: [damage.name] })
+                        }
+
+                        setCombat(damage.name, damage);
+                        setCombat(hurt.name, hurt);
+                    }
                 }
             }
         }
 
-        if (hurt.typeId === 'helden:dummy') {
+        if (setts?.loastHeart !== false) {
 
-            setCombat(hurt.nameTag, hurt)
+            if (hurt.typeId === 'helden:dummy') {
 
-            if (damage?.typeId === 'minecraft:player') {
-                setCombat(damage.name, damage);
+                setCombat(hurt.nameTag, hurt)
+
+                if (damage?.typeId === 'minecraft:player') {
+                    setCombat(damage.name, damage);
+                }
             }
-        }
 
-        if (hurtSave?.combatlog > 0) {
-            setCombat(hurt.name, hurt);
+            if (hurtSave?.combatlog > 0) {
+                setCombat(hurt.name, hurt);
+            }
         }
     })
 })

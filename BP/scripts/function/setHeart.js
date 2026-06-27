@@ -3,10 +3,14 @@ import { world, system } from '@minecraft/server';
 import { setLinkheart } from './setLinkheart';
 import { heldenSave } from './heldenSave';
 
-export function setHeart(name, heart) {
+export function setHeart(name, hearts) {
 
     const playerSave = heldenSave().player[name]
     const setts = heldenSave().settings
+
+    let heart = hearts
+
+    if (setts?.linkheart == false && hearts == 1) { heart-- }
 
     if (heart <= 0) {
 
@@ -20,42 +24,39 @@ export function setHeart(name, heart) {
 
     if (heart >= 0 && heart <= 4) {
 
-        if (heart === 1 && playerSave?.linkheart == undefined) {
+        if (setts?.linkheart === undefined || setts?.linkheart) {
 
-            generateLink();
+            if (heart == 1) {
 
-            function generateLink() {
+                generateLink();
 
-                const linkLength = Object.values(randomLink).length
+                function generateLink() {
 
-                if (linkLength >= 2) {
+                    const linkLength = Object.values(randomLink).length
 
-                    const partner = Object.values(randomLink)[Math.floor(Math.random() * linkLength)]
+                    if (linkLength >= 2) {
 
-                    if (partner !== name) {
+                        const partner = Object.values(randomLink)[Math.floor(Math.random() * linkLength)]
 
-                        delete randomLink[partner]
-                        setLinkheart(name, partner);
+                        if (partner !== name) {
 
-                    } else {
+                            delete randomLink[partner]
+                            setLinkheart(name, partner);
 
-                        system.run(() => { generateLink() })
+                        } else {
+
+                            system.run(() => { generateLink() })
+                        }
                     }
                 }
             }
-        }
-
-        if (setts?.linkheart === undefined || setts?.linkheart) {
 
             if (playerSave.heart === 1 && heart === 0 && playerSave?.linkheart) {
 
-                const partnerSave = heldenSave().player[playerSave.linkheart]
+                const linkName = playerSave.linkheart
+                const partnerSave = heldenSave().player[linkName]
 
-                if (partnerSave.heart > 0) {
-
-                    partnerSave.heart = (partnerSave.heart - 1)
-                    setNameTag(playerSave.linkheart);
-                }
+                system.run(() => { setHeart(linkName, (partnerSave.heart - 1)) })
             }
         }
 

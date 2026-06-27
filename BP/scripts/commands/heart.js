@@ -3,19 +3,21 @@ import { heldenSave } from '../function/heldenSave';
 import { setHeart } from '../function/setHeart';
 import { system } from '@minecraft/server';
 
-export function heart(senders, select, heart) {
+export function heart(senders, select, hearts) {
 
     system.run(() => {
 
         const playerSave = heldenSave().player[select]
+        const setts = heldenSave().settings
+
         const sender = senders.sourceEntity;
+        let heart = Number(hearts), max = 4
 
-        const getSett = heldenSave().settings;
+        if (setts?.linkheart == false) {
 
-        if (getSett?.linkheart === false && heart === 1) {
+            if (hearts >= 1) { heart += 1 }
 
-            sendMessage('helden.heart.noLinkheart', { name: sender.name });
-            return;
+            max = 3
         }
 
         if (heart == undefined) {
@@ -45,7 +47,7 @@ export function heart(senders, select, heart) {
 
         } else if (heart) {
 
-            sendMessage('helden.heart.allowedOption', { name: sender.name })
+            sendMessage('helden.heart.allowedOption', { name: sender.name, withs: [max] })
         }
     })
 }

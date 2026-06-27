@@ -14,25 +14,25 @@ system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
 
     customCommandRegistry.registerCommand({
         name: 'helden:heart',
-        description: 'Legt die Herzen eines spielers fest',
+        description: 'helden.commandDescription.heart',
         permissionLevel: 1,
         mandatoryParameters: [
-            { type: CustomCommandParamType.String, name: 'Name' }
+            { type: CustomCommandParamType.String, name: 'name' }
         ],
         optionalParameters: [
-            { type: CustomCommandParamType.Integer, name: 'Herzen' }
+            { type: CustomCommandParamType.Integer, name: 'hearts' }
         ]
     }, heart);
 
     customCommandRegistry.registerCommand({
         name: 'helden:settings',
-        description: 'Öffnet die Helden Einstellungen',
+        description: 'helden.commandDescription.settings',
         permissionLevel: 1
     }, settings);
 
     customCommandRegistry.registerCommand({
         name: 'helden:linkheart',
-        description: 'Linkheart command',
+        description: 'helden.commandDescription.linkheart',
         permissionLevel: 1,
         mandatoryParameters: [
             { type: CustomCommandParamType.Enum, name: 'helden:option' },
@@ -45,13 +45,13 @@ system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
 
     customCommandRegistry.registerCommand({
         name: 'helden:brückenbauer',
-        description: 'Einfach nur Brückenbauer',
+        description: 'helden.commandDescription.brueckenbauer',
         permissionLevel: 0
     }, brueckenbauer);
 
     customCommandRegistry.registerCommand({
         name: 'helden:duel',
-        description: 'Duel Command',
+        description: 'helden.commandDescription.duel',
         permissionLevel: 0,
         mandatoryParameters: [
             { type: CustomCommandParamType.String, name: 'name' }
@@ -63,17 +63,17 @@ system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
 
     customCommandRegistry.registerCommand({
         name: 'helden:banbydeath',
-        description: 'Verhindert das bestimmte spieler gebannd werden',
+        description: 'helden.commandDescription.banbydeath',
         permissionLevel: 1,
         mandatoryParameters: [
             { type: CustomCommandParamType.String, name: 'name' },
             { type: CustomCommandParamType.Boolean, name: 'option' }
         ]
-    }, banbydeath)
+    }, banbydeath);
 
     customCommandRegistry.registerCommand({
         name: 'helden:debug',
-        description: 'Gibt den Speicher von helden aus',
+        description: 'helden.commandDescription.debug',
         permissionLevel: 1
     }, debug);
 })

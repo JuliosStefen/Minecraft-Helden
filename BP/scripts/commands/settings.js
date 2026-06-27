@@ -12,11 +12,12 @@ export function settings(senders) {
         const setts = heldenSave().settings
 
         const settings = new ActionFormData()
-            .title('§l§6Einstellungen')
-            .button('Toggles', 'textures/ui/multi_toggle')
-            .button('Limit', 'textures/ui/limit')
-            .button('Duel', 'textures/ui/cross_sword')
-            .button('Löschen', 'textures/ui/trash_default')
+
+        settings.title('helden.ui.settingsTitle')
+            .button('helden.ui.toggles', 'textures/ui/multi_toggle')
+            .button('helden.ui.limits', 'textures/ui/limit')
+            .button('helden.ui.duel', 'textures/ui/cross_sword')
+            .button('helden.ui.delete', 'textures/ui/trash_default')
         settings.show(sender).then((r) => {
 
             if (r.canceled) return;
@@ -25,17 +26,17 @@ export function settings(senders) {
 
                 const toggles = new ModalFormData();
 
-                toggles.title('§l§6Toggles')
-                    .toggle('Debug', { defaultValue: setts?.debug ?? false })
-                    .toggle('Herzverlust', { defaultValue: setts?.loastHeart ?? true })
-                    .toggle('Dreizack blockieren', { defaultValue: setts?.blockTrident ?? true })
-                    .toggle('Andere Herzen anzeigen', { defaultValue: setts?.showOtherheart ?? false })
-                    .toggle('Linkheart', { defaultValue: setts?.linkheart ?? true })
-                    .label('§l§6Dimension')
-                    .toggle('The End', { defaultValue: setts?.lockEnd ?? true })
-                    .toggle('Nether', { defaultValue: setts?.lockNether ?? true })
-                    .dropdown('§l§6Herz Farbe', ['\uE200 Blau', '\uE210 Grün', '\uE220 Gelb', '\uE230 Rot', '\uE240 Pink', '\uE250 Lila'], { defaultValueIndex: setts?.heartColor ?? 0 })
-                    .submitButton('§l§2Speichern')
+                toggles.title('helden.ui.togglesTitle')
+                    .toggle('helden.ui.debug', { defaultValue: setts?.debug ?? false })
+                    .toggle('helden.ui.loseHeart', { defaultValue: setts?.loastHeart ?? true })
+                    .toggle('helden.ui.blockTrident', { defaultValue: setts?.blockTrident ?? true })
+                    .toggle('helden.ui.showOtherHearts', { defaultValue: setts?.showOtherheart ?? false })
+                    .toggle('helden.ui.linkHeart', { defaultValue: setts?.linkheart ?? true })
+                    .label('helden.ui.dimension')
+                    .toggle('helden.ui.theEnd', { defaultValue: setts?.lockEnd ?? false })
+                    .toggle('helden.ui.nether', { defaultValue: setts?.lockNether ?? false })
+                    .dropdown('helden.ui.heartColor', [{ translate: 'helden.ui.blue', with: ['\uE200'] }, { translate: 'helden.ui.green', with: ['\uE210'] }, { translate: 'helden.ui.yellow', with: ['\uE220'] }, { translate: 'helden.ui.red', with: ['\uE230'] }, { translate: 'helden.ui.pink', with: ['\uE240'] }, { translate: 'helden.ui.purple', with: ['\uE250'] }], { defaultValueIndex: setts?.heartColor ?? 0 })
+                    .submitButton('helden.ui.save')
                 toggles.show(sender).then((r) => {
 
                     if (r.canceled) return;
@@ -63,12 +64,12 @@ export function settings(senders) {
 
                 const limit = new ModalFormData();
 
-                limit.title('§l§6Limit')
-                    .toggle('Spinnennetz', { defaultValue: setts?.web_limitEna ?? true })
-                    .textField('Spinnennetz', '', { defaultValue: String(setts?.web_limit ?? '64') })
-                    .toggle('Enderperle', { defaultValue: setts?.pearl_limitEna ?? true })
-                    .textField('Enderperle', '', { defaultValue: String(setts?.pearl_limit ?? '16') })
-                    .submitButton('§l§2Speichern')
+                limit.title('helden.ui.limitsTitle')
+                    .toggle('helden.ui.cobwebLimit', { defaultValue: setts?.web_limitEna ?? true })
+                    .textField('helden.ui.cobwebLimit', '', { defaultValue: String(setts?.web_limit ?? '64') })
+                    .toggle('helden.ui.enderPearlLimit', { defaultValue: setts?.pearl_limitEna ?? true })
+                    .textField('helden.ui.enderPearlLimit', '', { defaultValue: String(setts?.pearl_limit ?? '16') })
+                    .submitButton('helden.ui.save')
                 limit.show(sender).then((r) => {
 
                     if (r.canceled) return;
@@ -86,12 +87,12 @@ export function settings(senders) {
 
                 const duelMenu = new ModalFormData();
 
-                duelMenu.title('§l§6Duel')
-                    .toggle('Duelle aktivieren', { defaultValue: setts?.aktiveDuel ?? true })
-                    .textField('Duel limit (0 = Kein limit)', '', { defaultValue: String(setts?.duellimmit ?? 0) })
-                    .textField('Automatische ablaufen von anfragen', '', { defaultValue: String(setts?.expireDuel ?? 30) })
-                    .textField('Inaktive Duels beenden', '', { defaultValue: String(setts?.inactiveDuel ?? 200) })
-                    .submitButton('§l§2Speichern')
+                duelMenu.title('helden.ui.duelTitle')
+                    .toggle('helden.ui.enableDuels', { defaultValue: setts?.aktiveDuel ?? true })
+                    .textField('helden.ui.duelLimit', '', { defaultValue: String(setts?.duellimmit ?? 0) })
+                    .textField('helden.ui.duelRequestExpiration', '', { defaultValue: String(setts?.expireDuel ?? 30) })
+                    .textField('helden.ui.inactiveDuelTimeout', '', { defaultValue: String(setts?.inactiveDuel ?? 200) })
+                    .submitButton('helden.ui.save')
                 duelMenu.show(sender).then((r) => {
 
                     if (r.canceled) return;
@@ -113,13 +114,14 @@ export function settings(senders) {
 
                 const remove = new ModalFormData();
 
-                remove.title('§l§6Löschen')
-                    .toggle('Linkheart')
-                    .toggle('Herzen')
-                    .toggle('Duel')
-                    .toggle('Spieler')
-                    .toggle('Einstellungen')
-                    .toggle('Alles')
+                remove.title('helden.ui.deleteTitle')
+                    .toggle('helden.ui.linkHeart')
+                    .toggle('helden.ui.hearts')
+                    .toggle('helden.ui.duel')
+                    .toggle('helden.ui.players')
+                    .toggle('helden.ui.settings')
+                    .toggle('helden.ui.all')
+                    .submitButton('helden.ui.deleteButton')
                 remove.show(sender).then((r) => {
 
                     if (r.canceled) return;

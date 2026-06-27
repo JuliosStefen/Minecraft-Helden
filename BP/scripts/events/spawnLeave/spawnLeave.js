@@ -42,7 +42,7 @@ world.beforeEvents.playerLeave.subscribe(({ player }) => {
 
     const playerSave = heldenSave().player[player.name]
 
-    stopDeath(player);
+    stopDeath(player, true);
 
     if (world.getPlayers().length <= 2) {
 

@@ -23,7 +23,7 @@ export function playDeath(player) {
     }, (73) * 0.2);
 }
 
-export function stopDeath(player) {
+export function stopDeath(player, noRunC) {
 
     for (let i = 1; i <= 73; i++) {
 
@@ -33,10 +33,13 @@ export function stopDeath(player) {
         }
     }
 
-    system.run(() => {
+    if (noRunC !== true) {
 
-        player.runCommand('camera @s clear');
-        player.runCommand(`title @a times 0 0 0`);
-        player.runCommand(`title @s title clear`);
-    })
+        system.run(() => {
+
+            player.runCommand('camera @s clear');
+            player.runCommand(`title @a times 0 0 0`);
+            player.runCommand(`title @s title clear`);
+        })
+    }
 }

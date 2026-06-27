@@ -13,7 +13,7 @@ world.afterEvents.playerDimensionChange.subscribe(({ player, fromDimension, toDi
         const y = player.getSpawnPoint()?.y ?? wsp.y
         const z = player.getSpawnPoint()?.z ?? wsp.z
 
-        if (toggles?.lockNether == undefined || toggles?.lockNether) {
+        if (!toggles?.lockNether) {
 
             if (toDimension.id === 'minecraft:nether') {
                 const dimension = world.getDimension(fromDimension.id);
@@ -22,7 +22,7 @@ world.afterEvents.playerDimensionChange.subscribe(({ player, fromDimension, toDi
             }
         }
 
-        if (toggles?.lockEnd == undefined || toggles?.lockEnd) {
+        if (!toggles?.lockEnd) {
 
             if (toDimension.id === 'minecraft:the_end') {
                 const dimension = world.getDimension(fromDimension.id);

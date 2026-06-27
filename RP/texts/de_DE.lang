@@ -13,8 +13,61 @@ item.helden:krone=Krone
 
 ## helden
 helden.helden.noOption=§c%s§r ist keine gültige Option
-helden.helden.willkommen=§bWillkommen bei Minecraft §lHelden!§r\n\n§ivon JuliosStefen & Arian & Lionkracher23\n§6Bugs Melden: §1https://discord.gg/vSf4WSQRfm
+helden.helden.willkommen=§bWillkommen bei Minecraft §lHelden!§r\n\n§ivon JuliosStefen & Arian & Lionkracher23\n§6Bugs Melden: §9https://discord.gg/vSf4WSQRfm
 ## helden
+
+## ui
+helden.ui.settingsTitle=§l§6Einstellungen
+helden.ui.toggles=Toggles
+helden.ui.limits=Limits
+helden.ui.duel=Duelle
+helden.ui.delete=Löschen
+
+helden.ui.togglesTitle=§l§6Toggles
+helden.ui.debug=Debug-Modus
+helden.ui.loseHeart=Herzverlust
+helden.ui.blockTrident=Dreizack blockieren
+helden.ui.showOtherHearts=Herzen anderer Spieler anzeigen
+helden.ui.linkHeart=Link Herzen
+helden.ui.dimension=§l§6Dimensionen
+helden.ui.theEnd=The End
+helden.ui.nether=Nether
+helden.ui.heartColor=§l§6Herz Farbe
+helden.ui.blue=%s §bBlau
+helden.ui.green=%s §aGrün
+helden.ui.yellow=%s §eGelb
+helden.ui.red=%s §cRot
+helden.ui.pink=%s §dRosa
+helden.ui.purple=%s §5Lila
+helden.ui.save=§l§2Speichern
+
+helden.ui.limitsTitle=§l§6Limits
+helden.ui.cobwebLimit=Spinnennetz-Limit
+helden.ui.enderPearlLimit=Enderperlen-Limit
+
+helden.ui.duelTitle=§l§6Duelle
+helden.ui.enableDuels=Duelle aktivieren
+helden.ui.duelLimit=Duell-Limit (0 = kein Limit)
+helden.ui.duelRequestExpiration=Anfragen automatisch ablaufen lassen (Sekunden)
+helden.ui.inactiveDuelTimeout=Inaktive Duelle beenden (Sekunden)
+
+helden.ui.deleteTitle=§l§6Löschen
+helden.ui.hearts=Herzen
+helden.ui.players=Spieler
+helden.ui.settings=Einstellungen
+helden.ui.all=Alles
+helden.ui.deleteButton=§l§4Löschen
+## ui
+
+## command/description
+helden.commandDescription.heart=Legt die Anzahl der Herzen eines Spielers fest.
+helden.commandDescription.settings=Öffnet die Helden-Einstellungen.
+helden.commandDescription.linkheart=Verknüpft Herzen oder hebt die Verknüpfung zwischen Spielern auf.
+helden.commandDescription.brueckenbauer=Einfach nur Brückenbauer.
+helden.commandDescription.duel=Fordert einen Spieler zu einem Duell heraus, bei dem keine Herzen verloren gehen.
+helden.commandDescription.banbydeath=Legt fest, ob ein Spieler durch Tod gebannt werden kann.
+helden.commandDescription.debug=Gibt Debug-Informationen des Helden-Speichers aus.
+## command/description
 
 ## commands/banbydeath
 helden.banbydeath.false=§6%s§r wird nicht mehr nach dem Tod gebannt!
@@ -39,12 +92,11 @@ helden.duel.noAktive=Duelle sind Deaktiviert!
 ## commands/duel
 
 ## commands/heart
-helden.heart.noLinkheart=§cLinkhearts sind deaktiviert
 helden.heart.haveHeart=§6%s§r hat §6%s§r Herzen
 helden.heart.noExis=§6%s§r exestiert nicht
 helden.heart.setHeart=Die Herzen von §6%s§r wurden auf §6%s§r gesetzt!
 helden.heart.noExist=§6%s§r exestiert nicht!
-helden.heart.allowedOption=§cEs sind nur die Zahlen von 0 - 4 Erlaubt!
+helden.heart.allowedOption=§cEs sind nur die Zahlen von 0 - %s Erlaubt!
 ## commands/heart
 
 ## commands/linkheart
@@ -79,7 +131,10 @@ helden.entityHurt.attacked2=Du wurdest von §6%s§r angegriffen
 ## events/entityHurt/entityHurt
 
 ## events/entityDie
-helden.entityDie.winDuel=§6%s§r hat das Duell gegen §6%s§r gewonnen!
+helden.entityDie.winDuel=§a%s§r hat das Duell gegen §c%s§r gewonnen!
+helden.entityDie.killedFromWhite=§c%s§r wurde von §a%s§r mit §o%s§r eliminiert §c(-1 Leben)
+helden.entityDie.killedFrom=§c%s§r wurde von §a%s§r eliminiert §c(-1 Leben)
+helden.entityDie.die=§c%s§r ist gestorben §c(-1 Leben)
 ## events/entityDie
 
 ## events/InteractPlace

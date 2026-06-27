@@ -13,8 +13,61 @@ item.helden:krone=Crown
 
 ## helden
 helden.helden.noOption=§c%s§r is not a valid option
-helden.helden.willkommen=§bWelcome to Minecraft §lHeroes!§r\n\n§iby JuliosStefen & Arian & Lionkracher23\n§6Report Bugs: §1https://discord.gg/vSf4WSQRfm
+helden.helden.willkommen=§bWelcome to Minecraft §lHeroes!§r\n\n§iby JuliosStefen & Arian & Lionkracher23\n§6Report Bugs: §9https://discord.gg/vSf4WSQRfm
 ## helden
+
+## ui
+helden.ui.settingsTitle=§l§6Settings
+helden.ui.toggles=Toggles
+helden.ui.limits=Limits
+helden.ui.duel=Duels
+helden.ui.delete=Delete
+
+helden.ui.togglesTitle=§l§6Toggles
+helden.ui.debug=Debug Mode
+helden.ui.loseHeart=Heart Loss
+helden.ui.blockTrident=Block Tridents
+helden.ui.showOtherHearts=Show Other Players' Hearts
+helden.ui.linkHeart=Link Hearts
+helden.ui.dimension=§l§6Dimensions
+helden.ui.theEnd=The End
+helden.ui.nether=Nether
+helden.ui.heartColor=§l§6Heart Color
+helden.ui.blue=%s §bBlue
+helden.ui.green=%s §aGreen
+helden.ui.yellow=%s §eYellow
+helden.ui.red=%s §cRed
+helden.ui.pink=%s §dPink
+helden.ui.purple=%s §5Purple
+helden.ui.save=§l§2Save
+
+helden.ui.limitsTitle=§l§6Limits
+helden.ui.cobwebLimit=Cobweb Limit
+helden.ui.enderPearlLimit=Ender Pearl Limit
+
+helden.ui.duelTitle=§l§6Duels
+helden.ui.enableDuels=Enable Duels
+helden.ui.duelLimit=Duel Limit (0 = Unlimited)
+helden.ui.duelRequestExpiration=Request Expiration (Seconds)
+helden.ui.inactiveDuelTimeout=End Inactive Duels (Seconds)
+
+helden.ui.deleteTitle=§l§6Delete
+helden.ui.hearts=Hearts
+helden.ui.players=Players
+helden.ui.settings=Settings
+helden.ui.all=All
+helden.ui.deleteButton=§l§4Delete
+## ui
+
+## command/description
+helden.commandDescription.heart=Sets the number of hearts for a player.
+helden.commandDescription.settings=Opens the Helden settings.
+helden.commandDescription.linkheart=Links or unlinks hearts between players.
+helden.commandDescription.brueckenbauer=Just Bridge Builder.
+helden.commandDescription.duel=Challenges a player to a duel where no hearts are lost.
+helden.commandDescription.banbydeath=Controls whether a player can be banned upon death.
+helden.commandDescription.debug=Displays debug information for the Helden storage.
+## command/description
 
 ## commands/banbydeath
 helden.banbydeath.false=§6%s§r will no longer be banned upon death
@@ -39,12 +92,11 @@ helden.duel.noAktive=Duels are disabled
 ## commands/duel
 
 ## commands/heart
-helden.heart.noLinkheart=§cLink Hearts are disabled
 helden.heart.haveHeart=§6%s§r has §6%s§r hearts
 helden.heart.noExis=§6%s§r does not exist
 helden.heart.setHeart=The hearts of §6%s§r have been set to §6%s§r
 helden.heart.noExist=§6%s§r does not exist
-helden.heart.allowedOption=§cOnly numbers from 0 to 4 are allowed
+helden.heart.allowedOption=§cOnly numbers from 0 to %s are allowed
 ## commands/heart
 
 ## commands/linkheart
@@ -79,7 +131,10 @@ helden.entityHurt.attacked2=You were attacked by §6%s§r
 ## events/entityHurt/entityHurt
 
 ## events/entityDie
-helden.entityDie.winDuel=§6%s§r won a duel against §6%s§r
+helden.entityDie.winDuel=§a%s§r won a duel against §c%s§r
+helden.entityDie.killedFromWhite=§c%s§r was eliminated by §a%s§r with §o%s§r §c(-1 life)
+helden.entityDie.killedFrom=§c%s§r was eliminated by §a%s§r §c(-1 life)
+helden.entityDie.die=§c%s§r died §c(-1 life)
 ## events/entityDie
 
 ## events/InteractPlace

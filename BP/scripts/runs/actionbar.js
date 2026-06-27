@@ -8,6 +8,7 @@ system.runInterval(() => {
     world.getPlayers().forEach(player => {
 
         const playerSave = heldenSave().player?.[player.name]
+        const setts = heldenSave().settings
 
         if (playerSave) {
 
@@ -36,7 +37,7 @@ system.runInterval(() => {
                 const h1 = String.fromCharCode(0xE200 + c * 16 + 3);
                 const h2 = String.fromCharCode(0xE200 + c * 16 + 2);
 
-                if (aktiveDuel[player.name]) h += 3
+                if (setts?.loastHeart == false || aktiveDuel[player.name]) h += 3
                 if (playerSave.heart >= 2) { health = `\n${String.fromCharCode(0xE300 + c * 16 + h)}` }
                 if (playerSave.heart === 1) { health = `${h1} §b${playerSave?.linkheart || '§cKein Link'} ${h2}` }
                 if (playerSave.heart <= 0) { health = `\n\uE205\uE204` }

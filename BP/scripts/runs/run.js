@@ -12,7 +12,7 @@ system.run(() => {
 
     const setts = heldenSave().settings
 
-    // world.gameRules.showDeathMessages = false;
+    world.gameRules.showDeathMessages = false;
 
     if (setts.debug == true) {
 
@@ -75,30 +75,31 @@ export function loadId(nr = 15) {
 
 export function lockArmor(name, mode) {
 
-    system.run(() => {
+    world.getPlayers().forEach(player => {
 
-        for (const player of world.getPlayers()) {
+        if (player.name === name) {
 
-            if (player.name === name) {
+            const equippable = player.getComponent('equippable')
 
-                const head = player.getComponent('equippable').getEquipment('Head');
-                const chest = player.getComponent('equippable').getEquipment('Chest');
-                const legs = player.getComponent('equippable').getEquipment('Legs');
-                const feet = player.getComponent('equippable').getEquipment('Feet');
+            const head = equippable.getEquipment('Head');
+            const chest = equippable.getEquipment('Chest');
+            const legs = equippable.getEquipment('Legs');
+            const feet = equippable.getEquipment('Feet');
 
-                function slot(slot) {
-                    if (slot) {
-                        slot.clone();
-                        slot.lockMode = mode
-                        player.getComponent('equippable').setEquipment('Head', head);
-                    }
+            function setSlot(slot, item) {
+
+                if (item) {
+
+                    item.clone();
+                    item.lockMode = mode
+                    player.getComponent('equippable').setEquipment(slot, item);
                 }
-
-                slot(head);
-                slot(chest);
-                slot(legs);
-                slot(feet);
             }
+
+            setSlot('Head', head);
+            setSlot('Chest', chest);
+            setSlot('Legs', legs);
+            setSlot('Feet', feet);
         }
     })
 }
