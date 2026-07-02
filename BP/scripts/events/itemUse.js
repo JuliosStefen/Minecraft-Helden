@@ -35,6 +35,7 @@ world.beforeEvents.itemUse.subscribe((event) => {
                 system.run(() => {
 
                     const { x, y, z } = source.location
+                    const dimension = world.getDimension(source.dimension.id)
 
                     world.gameRules.sendCommandFeedback = false;
 
@@ -43,10 +44,10 @@ world.beforeEvents.itemUse.subscribe((event) => {
 
                     world.gameRules.sendCommandFeedback = true;
 
-                    source.spawnParticle('helden:heart_plus', { x, y: y + 1, z })
+                    dimension.spawnParticle('helden:heart_plus', { x, y: y + 1, z })
 
-                    source.playSound('shriek.sculk_shrieker');
-                    source.playSound('random.glass');
+                    dimension.playSound('shriek.sculk_shrieker', { x, y, z });
+                    dimension.playSound('random.glass', { x, y, z });
 
                     playerSave.heart++
                 })
@@ -62,6 +63,7 @@ world.beforeEvents.itemUse.subscribe((event) => {
                 system.run(() => {
 
                     const { x, y, z } = source.location
+                    const dimension = world.getDimension(source.dimension.id)
 
                     world.gameRules.sendCommandFeedback = false;
 
@@ -70,9 +72,8 @@ world.beforeEvents.itemUse.subscribe((event) => {
 
                     world.gameRules.sendCommandFeedback = true;
 
-                    source.spawnParticle('helden:heart_minus', { x, y: y + 1, z })
-
-                    source.playSound('shriek.sculk_shrieker');
+                    dimension.spawnParticle('helden:heart_minus', { x, y: y + 1, z })
+                    dimension.playSound('shriek.sculk_shrieker', { x, y, z });
 
                     playerSave.heart--
                 })

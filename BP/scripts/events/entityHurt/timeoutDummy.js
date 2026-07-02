@@ -2,7 +2,7 @@ import { heldenSave } from '../../function/heldenSave';
 import { dummyId } from '../../function/dummyIds';
 import { system } from '@minecraft/server';
 
-let dummyDesp = {}
+export let dummyDesp = {}
 
 export function timeoutDummy(entity) {
 

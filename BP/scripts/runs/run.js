@@ -67,7 +67,7 @@ export function loadId(nr = 15) {
 
     for (let s = 0; s <= nr; s++) {
 
-        id += wert[Math.round(Math.random() * wert.length)];
+        id += wert[Math.round(Math.random() * (wert.length - 1))];
     }
 
     return id;

@@ -1,16 +1,17 @@
-import { aktiveDuel, duelEnd } from '../function/duel';
+import { aktiveDuel, duelEnd } from '../../function/duel';
 import { world, system } from '@minecraft/server';
-import { sendMessage } from '../runs/run';
-import { heldenSave } from '../function/heldenSave';
-import { playDeath } from '../function/deathAnimation';
-import { setHeart } from '../function/setHeart';
+import { sendMessage } from '../../runs/run';
+import { heldenSave } from '../../function/heldenSave';
+import { playDeath } from '../../function/deathAnimation';
+import { setHeart } from '../../function/setHeart';
+
+import { deathMessage } from './deathMessage'
 
 world.afterEvents.entityDie.subscribe(({ deadEntity, damageSource }) => {
 
     system.run(() => {
 
         const damager = damageSource?.damagingEntity
-        const mainHand = damager?.getComponent('equippable').getEquipment('Mainhand');
 
         if (deadEntity.typeId === 'helden:dummy') {
 
@@ -20,6 +21,7 @@ world.afterEvents.entityDie.subscribe(({ deadEntity, damageSource }) => {
             dummySave.dummy = { kill: true, keepInventory }
             delete dummySave.combatlog
 
+            deathMessage(deadEntity, damager)
             setHeart(deadEntity.nameTag, (dummySave.heart - 1))
         }
 
@@ -47,22 +49,7 @@ world.afterEvents.entityDie.subscribe(({ deadEntity, damageSource }) => {
 
                     if (deadSave?.combatlog >= 0.500 || damager?.typeId === 'minecraft:player') {
 
-                        if (mainHand?.nameTag) {
-
-                            sendMessage('helden.entityDie.killedFromWhite', { withs: [deadEntity.name, damager.name, mainHand.nameTag] });
-
-                        } else {
-
-                            if (damager?.name) {
-
-                                sendMessage('helden.entityDie.killedFrom', { withs: [deadEntity.name, damager.name] });
-
-                            } else {
-
-                                sendMessage('helden.entityDie.die', { withs: [deadEntity.name] });
-                            }
-                        }
-
+                        deathMessage(deadEntity, damager)
                         setHeart(deadEntity.name, (deadSave.heart - 1))
                         playDeath(deadEntity);
                     }

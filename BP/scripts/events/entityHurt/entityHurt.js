@@ -48,7 +48,7 @@ world.afterEvents.entityHurt.subscribe(({ damageSource, hurtEntity }) => {
                 setDuel(duelName, damage.name)
             }
 
-            if (aktiveDuel[damage.name] == undefined && aktiveDuel[hurt.name] == undefined) {
+            if (aktiveDuel[damage.name] == undefined && aktiveDuel[hurt.name] == undefined && setts?.loastHeart !== false) {
 
                 const mainHand = damage.getComponent('equippable').getEquipment('Mainhand')
 
@@ -56,18 +56,18 @@ world.afterEvents.entityHurt.subscribe(({ damageSource, hurtEntity }) => {
 
                     if (damageSave.heart <= 3 && hurtSave.heart >= 1) {
 
-                        {
-                            const { x, y, z } = damage.location
-                            damage.spawnParticle('helden:heart_plus', { x, y: y + 1, z })
-                        }
+                        const { x, y, z } = damage.location
+                        const dimension = world.getDimension(damage.dimension.id)
 
                         {
                             const { x, y, z } = hurt.location
-                            hurt.spawnParticle('helden:heart_minus', { x, y: y + 1, z })
+                            dimension.spawnParticle('helden:heart_minus', { x, y: y + 1, z })
                         }
 
-                        hurt.playSound('shriek.sculk_shrieker');
-                        damage.playSound('shriek.sculk_shrieker');
+                        damage.runCommand('clear @s helden:soul_stealer 0 1')
+
+                        dimension.spawnParticle('helden:heart_plus', { x, y: y + 1, z })
+                        dimension.playSound('shriek.sculk_shrieker', { x, y, z });
 
                         setHeart(damage.name, (damageSave.heart + 1))
                         setHeart(hurt.name, (hurtSave.heart - 1))
@@ -75,19 +75,16 @@ world.afterEvents.entityHurt.subscribe(({ damageSource, hurtEntity }) => {
 
                 } else {
 
-                    if (setts?.loastHeart !== false) {
-
-                        if (!damageSave?.combatlog) {
-                            sendMessage('helden.entityHurt.attacked', { name: damage.name, withs: [hurt.name] })
-                        }
-
-                        if (!hurtSave?.combatlog) {
-                            sendMessage('helden.entityHurt.attacked2', { name: hurt.name, withs: [damage.name] })
-                        }
-
-                        setCombat(damage.name, damage);
-                        setCombat(hurt.name, hurt);
+                    if (!damageSave?.combatlog) {
+                        sendMessage('helden.entityHurt.attacked', { name: damage.name, withs: [hurt.name] })
                     }
+
+                    if (!hurtSave?.combatlog) {
+                        sendMessage('helden.entityHurt.attacked2', { name: hurt.name, withs: [damage.name] })
+                    }
+
+                    setCombat(damage.name, damage);
+                    setCombat(hurt.name, hurt);
                 }
             }
         }

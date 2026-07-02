@@ -12,7 +12,7 @@
 		"version": [
 			2,
 			2,
-			1
+			2
 		]
 	},
 	"modules": [
@@ -22,10 +22,27 @@
 			"version": [
 				2,
 				2,
-				1
+				2
 			]
 		}
 	],
+	"dependencies": [
+		{
+			"uuid": "a46bee50-ea85-4f58-b98e-568bb4349354",
+			"version": [
+				2,
+				2,
+				2
+			]
+		}
+	],
+	"metadata": {
+		"product_type": "addon",
+		"authors": [
+			"JuliosStefen",
+			"https://discord.gg/vSf4WSQRfm"
+		]
+	},
 	"subpacks": [
 		{
 			"name": "Minecraft Helden Titel: §cdeaktiviert",
@@ -37,12 +54,5 @@
 			"folder_name": "enabled",
 			"memory_tier": 0
 		}
-	],
-	"metadata": {
-		"product_type": "addon",
-		"authors": [
-			"JuliosStefen",
-			"https://discord.gg/vSf4WSQRfm"
-		]
-	}
+	]
 }
