@@ -1,22 +1,20 @@
 import { sendMessage } from '../../runs/run';
 
-export function deathMessage(deadEntity, killer) {
+export function deathMessage(deadEntity, killer, killerNameFallback) {
 
-    const mainHand = killer?.getComponent('equippable').getEquipment('Mainhand');
+    const killerName = killer?.name ?? killerNameFallback
 
-    if (mainHand?.nameTag) {
+    if (killerName) {
 
-        sendMessage('helden.entityDie.killedFromWhite', { withs: [deadEntity?.name ?? deadEntity.nameTag, killer.name, mainHand.nameTag] });
+        const mainHand = killer?.getComponent('equippable')?.getEquipment('Mainhand');
 
-    } else {
+        if (mainHand?.nameTag) {
 
-        if (killer?.name) {
-
-            sendMessage('helden.entityDie.killedFrom', { withs: [deadEntity?.name ?? deadEntity.nameTag, killer.name] });
+            sendMessage('helden.entityDie.killedFromWhite', { withs: [deadEntity?.name ?? deadEntity.nameTag, killerName, mainHand.nameTag] });
 
         } else {
 
-            sendMessage('helden.entityDie.die', { withs: [deadEntity.name] });
+            sendMessage('helden.entityDie.killedFrom', { withs: [deadEntity?.name ?? deadEntity.nameTag, killerName] });
         }
     }
-} 
+}

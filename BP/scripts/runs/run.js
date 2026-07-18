@@ -5,6 +5,7 @@ import { heldenSave } from '../function/heldenSave';
 import '../commands/registry';
 import '../events/event';
 import './actionbar';
+import './armorLock';
 
 installSave();
 
@@ -35,29 +36,7 @@ export let playerLimit = {}, randomLink = {}
 
 export const banReason = '§l[§bMCHelden§r§l]§r\n\nDu hast alle Herzen verloren und bist damit aus dem\nProjekt §l§causgeschieden!'
 
-export function sendMessage(translate, { withs = [], name } = {}) {
-
-    system.run(() => {
-
-        let withss = []
-
-        for (const one of withs) { withss.push(String(one)) }
-
-        const message = { rawtext: [{ text: '[§bHelden§r] ' }, { translate, with: withss }] }
-
-        if (name === undefined) {
-
-            world.sendMessage(message);
-
-        } else {
-
-            for (const player of world.getPlayers().filter((p) => p.name === name)) {
-
-                player.sendMessage(message);
-            }
-        }
-    })
-}
+export { sendMessage, lockArmor, unstuckInventory } from './helpers';
 
 export function loadId(nr = 15) {
 
@@ -71,37 +50,6 @@ export function loadId(nr = 15) {
     }
 
     return id;
-}
-
-export function lockArmor(name, mode) {
-
-    world.getPlayers().forEach(player => {
-
-        if (player.name === name) {
-
-            const equippable = player.getComponent('equippable')
-
-            const head = equippable.getEquipment('Head');
-            const chest = equippable.getEquipment('Chest');
-            const legs = equippable.getEquipment('Legs');
-            const feet = equippable.getEquipment('Feet');
-
-            function setSlot(slot, item) {
-
-                if (item) {
-
-                    item.clone();
-                    item.lockMode = mode
-                    player.getComponent('equippable').setEquipment(slot, item);
-                }
-            }
-
-            setSlot('Head', head);
-            setSlot('Chest', chest);
-            setSlot('Legs', legs);
-            setSlot('Feet', feet);
-        }
-    })
 }
 
 export function setNameTag(name) {

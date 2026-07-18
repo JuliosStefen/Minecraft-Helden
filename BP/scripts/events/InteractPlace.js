@@ -43,4 +43,13 @@ world.beforeEvents.playerInteractWithBlock.subscribe((event) => {
             }
         }
     }
+
+    if ((event.block?.typeId === 'minecraft:chest' || event.block?.typeId === 'minecraft:trapped_chest' || event.block?.typeId === 'minecraft:ender_chest') && (setts?.blockChest === undefined || setts.blockChest)) {
+
+        if (playerSave?.combatlog >= 0) {
+
+            sendMessage('helden.ItemBlock.noChestInCombat', { name: player.name })
+            event.cancel = true;
+        }
+    }
 })

@@ -7,6 +7,8 @@ export function installSave() {
 
         heldenSave().settings ??= {}
         heldenSave().player ??= {}
+
+        heldenSave().settings.linkheart ??= true
     })
 }
 

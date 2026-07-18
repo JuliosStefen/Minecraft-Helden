@@ -1,4 +1,5 @@
 import { setNameTag, sendMessage, randomLink } from '../runs/run';
+import { resetAllArmorLocks } from '../runs/armorLock';
 import { ActionFormData, ModalFormData } from '@minecraft/server-ui';
 import { world, system } from '@minecraft/server';
 import { installPlayer } from '../runs/install'
@@ -14,8 +15,10 @@ export function settings(senders) {
         const settings = new ActionFormData()
 
         settings.title('helden.ui.settingsTitle')
+            .button('helden.ui.heartSystem', 'textures/ui/heart')
             .button('helden.ui.toggles', 'textures/ui/multi_toggle')
             .button('helden.ui.limits', 'textures/ui/limit')
+            .button('helden.ui.armorLock', 'textures/ui/lock_color')
             .button('helden.ui.duel', 'textures/ui/cross_sword')
             .button('helden.ui.delete', 'textures/ui/trash_default')
         settings.show(sender).then((r) => {
@@ -24,14 +27,36 @@ export function settings(senders) {
 
             if (r.selection == 0) {
 
+                const heartSystem = new ModalFormData();
+
+                heartSystem.title('helden.ui.heartSystemTitle')
+                    .dropdown('helden.ui.heartSystemDropdown', [{ translate: 'helden.ui.heartSystemNormal' }, { translate: 'helden.ui.heartSystemLinked' }], { defaultValueIndex: setts?.linkheart ? 1 : 0 })
+                    .submitButton('helden.ui.save')
+                heartSystem.show(sender).then((r) => {
+
+                    if (r.canceled) return;
+
+                    setts.linkheart = (r.formValues[0] == 1)
+
+                    world.getPlayers().forEach(player => {
+
+                        setNameTag(player.name);
+                    })
+
+                    sendMessage('helden.settings.updates', { name: sender.name });
+                })
+            }
+
+            if (r.selection == 1) {
+
                 const toggles = new ModalFormData();
 
                 toggles.title('helden.ui.togglesTitle')
                     .toggle('helden.ui.debug', { defaultValue: setts?.debug ?? false })
                     .toggle('helden.ui.loseHeart', { defaultValue: setts?.loastHeart ?? true })
                     .toggle('helden.ui.blockTrident', { defaultValue: setts?.blockTrident ?? true })
+                    .toggle('helden.ui.blockChest', { defaultValue: setts?.blockChest ?? true })
                     .toggle('helden.ui.showOtherHearts', { defaultValue: setts?.showOtherheart ?? false })
-                    .toggle('helden.ui.linkHeart', { defaultValue: setts?.linkheart ?? true })
                     .label('helden.ui.dimension')
                     .toggle('helden.ui.theEnd', { defaultValue: setts?.lockEnd ?? false })
                     .toggle('helden.ui.nether', { defaultValue: setts?.lockNether ?? false })
@@ -44,8 +69,8 @@ export function settings(senders) {
                     setts.debug = r.formValues[0]
                     setts.loastHeart = r.formValues[1]
                     setts.blockTrident = r.formValues[2]
-                    setts.showOtherheart = r.formValues[3]
-                    setts.linkheart = r.formValues[4]
+                    setts.blockChest = r.formValues[3]
+                    setts.showOtherheart = r.formValues[4]
                     // Dimension label [5]
                     setts.lockEnd = r.formValues[6]
                     setts.lockNether = r.formValues[7]
@@ -60,7 +85,7 @@ export function settings(senders) {
                 })
             }
 
-            if (r.selection == 1) {
+            if (r.selection == 2) {
 
                 const limit = new ModalFormData();
 
@@ -83,7 +108,26 @@ export function settings(senders) {
                 })
             }
 
-            if (r.selection == 2) {
+            if (r.selection == 3) {
+
+                const armorLockMenu = new ModalFormData();
+
+                armorLockMenu.title('helden.ui.armorLockSettingsTitle')
+                    .toggle('helden.ui.armorLockEnabled', { defaultValue: setts?.armorLock ?? true })
+                    .textField('helden.ui.armorLockDuration', '', { defaultValue: String(setts?.armorLockDuration ?? 10) })
+                    .submitButton('helden.ui.save')
+                armorLockMenu.show(sender).then((r) => {
+
+                    if (r.canceled) return;
+
+                    setts.armorLock = r.formValues[0]
+                    setts.armorLockDuration = Math.max(1, Number(r.formValues[1]) || 10)
+
+                    sendMessage('helden.settings.updates', { name: sender.name });
+                })
+            }
+
+            if (r.selection == 4) {
 
                 const duelMenu = new ModalFormData();
 
@@ -110,7 +154,7 @@ export function settings(senders) {
                 })
             }
 
-            if (r.selection == 3) {
+            if (r.selection == 5) {
 
                 const remove = new ModalFormData();
 
@@ -118,6 +162,7 @@ export function settings(senders) {
                     .toggle('helden.ui.linkHeart')
                     .toggle('helden.ui.hearts')
                     .toggle('helden.ui.duel')
+                    .toggle('helden.ui.armorLockReset')
                     .toggle('helden.ui.players')
                     .toggle('helden.ui.settings')
                     .toggle('helden.ui.all')
@@ -155,18 +200,25 @@ export function settings(senders) {
 
                     if (r.formValues[3]) {
 
+                        resetAllArmorLocks()
+
+                        sendMessage('helden.settings.removeArmorLock', { name: sender.name })
+                    }
+
+                    if (r.formValues[4]) {
+
                         heldenSave().player = {}
 
                         sendMessage('helden.settings.removePlayer', { name: sender.name })
                     }
 
-                    if (r.formValues[4]) {
+                    if (r.formValues[5]) {
 
                         heldenSave().settings = {}
                         sendMessage('helden.settings.removeSettings', { name: sender.name })
                     }
 
-                    if (r.formValues[5]) {
+                    if (r.formValues[6]) {
 
                         heldenSave().player = {}
                         heldenSave().settings = {}

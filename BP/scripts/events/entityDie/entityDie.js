@@ -1,6 +1,7 @@
 import { aktiveDuel, duelEnd } from '../../function/duel';
 import { world, system } from '@minecraft/server';
 import { sendMessage } from '../../runs/run';
+import { releaseArmorLock } from '../../runs/armorLock';
 import { heldenSave } from '../../function/heldenSave';
 import { playDeath } from '../../function/deathAnimation';
 import { setHeart } from '../../function/setHeart';
@@ -27,6 +28,8 @@ world.afterEvents.entityDie.subscribe(({ deadEntity, damageSource }) => {
 
         if (deadEntity.typeId === 'minecraft:player') {
 
+            releaseArmorLock(deadEntity.name)
+
             const deadSave = heldenSave().player[deadEntity.name]
 
             if (aktiveDuel[deadEntity.name]) {
@@ -49,13 +52,14 @@ world.afterEvents.entityDie.subscribe(({ deadEntity, damageSource }) => {
 
                     if (deadSave?.combatlog >= 0.500 || damager?.typeId === 'minecraft:player') {
 
-                        deathMessage(deadEntity, damager)
+                        deathMessage(deadEntity, damager, deadSave.lastAttacker)
                         setHeart(deadEntity.name, (deadSave.heart - 1))
                         playDeath(deadEntity);
                     }
                 }
 
                 delete playerSave.combatlog
+                delete playerSave.lastAttacker
             }
         }
     })

@@ -11,6 +11,9 @@
 		},
 		"krone": {
 			"textures": "textures/items/krone"
+		},
+		"settings_item": {
+			"textures": "textures/items/settings_item"
 		}
 	}
 }

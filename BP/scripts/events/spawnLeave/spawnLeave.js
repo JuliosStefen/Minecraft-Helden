@@ -1,4 +1,5 @@
 import { setNameTag, randomLink } from '../../runs/run';
+import { resumeArmorLock } from '../../runs/armorLock';
 import { world, system } from '@minecraft/server';
 import { installPlayer } from '../../runs/install';
 import { setLinkheart } from '../../function/setLinkheart';
@@ -11,9 +12,11 @@ world.afterEvents.playerSpawn.subscribe(({ initialSpawn, player }) => {
 
     system.run(() => {
 
-        stopDeath(player);
-
         const playerSave = heldenSave().player[player.name]
+
+        resumeArmorLock(player.name)
+
+        stopDeath(player);
 
         if (playerSave?.banbydeath == false && playerSave.heart <= 0) {
 
@@ -32,6 +35,18 @@ world.afterEvents.playerSpawn.subscribe(({ initialSpawn, player }) => {
             }
 
             player.sendMessage({ translate: 'helden.helden.willkommen' });
+
+            const spielerjoin = {
+                "Warden1494": "helden.spawnLeave.joinWarden1494",
+                "JuliosStefen": "helden.spawnLeave.joinJuliosstefen",
+                "Lionkracher23": "helden.spawnLeave.joinLionkracher23"
+            }
+
+            const nachrichtKey = spielerjoin[player.name]
+
+            if (nachrichtKey) {
+                world.sendMessage({ translate: nachrichtKey })
+            }
         }
     })
 })

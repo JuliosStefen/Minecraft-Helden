@@ -9,6 +9,7 @@ item.helden:soul_stealer=§bSoul Stealer§r
 item.helden:soul_amulet=Soul Amulet
 item.helden:broken_soul_amulet=Broken Soul Amulet
 item.helden:krone=Crown
+item.helden:settings_item=§6Settings§r
 ## items
 
 ## helden
@@ -19,14 +20,17 @@ helden.helden.willkommen=§bWelcome to Minecraft §lHeroes!§r\n\n§iby JuliosSt
 ## ui
 helden.ui.settingsTitle=§l§6Settings
 helden.ui.toggles=Toggles
+helden.ui.heartSystem=Heart System
 helden.ui.limits=Limits
 helden.ui.duel=Duels
+helden.ui.armorLock=Armor Lock
 helden.ui.delete=Delete
 
 helden.ui.togglesTitle=§l§6Toggles
 helden.ui.debug=Debug Mode
 helden.ui.loseHeart=Heart Loss
 helden.ui.blockTrident=Block Tridents
+helden.ui.blockChest=Block Chests In Combat
 helden.ui.showOtherHearts=Show Other Players' Hearts
 helden.ui.linkHeart=Link Hearts
 helden.ui.dimension=§l§6Dimensions
@@ -40,10 +44,20 @@ helden.ui.red=%s §cRed
 helden.ui.pink=%s §dPink
 helden.ui.purple=%s §5Purple
 helden.ui.save=§l§2Save
+helden.ui.next=§l§6Next
 
 helden.ui.limitsTitle=§l§6Limits
 helden.ui.cobwebLimit=Cobweb Limit
 helden.ui.enderPearlLimit=Ender Pearl Limit
+
+helden.ui.heartSystemTitle=§l§6Heart System
+helden.ui.heartSystemDropdown=Mode
+helden.ui.heartSystemNormal=Normal
+helden.ui.heartSystemLinked=Link Hearts
+
+helden.ui.armorLockSettingsTitle=§l§6Armor Lock
+helden.ui.armorLockEnabled=Enable armor lock
+helden.ui.armorLockDuration=Duration (minutes)
 
 helden.ui.duelTitle=§l§6Duels
 helden.ui.enableDuels=Enable Duels
@@ -53,10 +67,12 @@ helden.ui.inactiveDuelTimeout=End Inactive Duels (Seconds)
 
 helden.ui.deleteTitle=§l§6Delete
 helden.ui.hearts=Hearts
+helden.ui.armorLockReset=Armorlock
 helden.ui.players=Players
 helden.ui.settings=Settings
 helden.ui.all=All
 helden.ui.deleteButton=§l§4Delete
+
 ## ui
 
 ## command/description
@@ -119,6 +135,7 @@ helden.linkheart.linkedWhite=§6%s§r is linked with §6%s§r
 helden.settings.updates=Settings updated
 helden.settings.removeLinkheart=Link Hearts removed
 helden.settings.removeHeart=Hearts removed
+helden.settings.removeArmorLock=Armor lock reset
 helden.settings.removeDuel=Duels removed
 helden.settings.removePlayer=Player data deleted
 helden.settings.removeSettings=Settings deleted
@@ -126,15 +143,14 @@ helden.settings.removeAll=All data has been deleted
 ## commands/settings
 
 ## events/entityHurt/entityHurt
-helden.entityHurt.attacked=You attacked §6%s§r
-helden.entityHurt.attacked2=You were attacked by §6%s§r
+helden.entityHurt.attacked=You attacked §a%s§r!
+helden.entityHurt.attacked2=You were attacked by §c%s§r!
 ## events/entityHurt/entityHurt
 
 ## events/entityDie
 helden.entityDie.winDuel=§a%s§r won a duel against §c%s§r
-helden.entityDie.killedFromWhite=§c%s§r was eliminated by §a%s§r with §o%s§r §c(-1 life)
-helden.entityDie.killedFrom=§c%s§r was eliminated by §a%s§r §c(-1 life)
-helden.entityDie.die=§c%s§r died §c(-1 life)
+helden.entityDie.killedFromWhite=§c%s§r was killed in combat by §a%s§r with §o%s§r §c(-1 life)
+helden.entityDie.killedFrom=§c%s§r was killed in combat by §a%s§r §c(-1 life)
 ## events/entityDie
 
 ## events/InteractPlace
@@ -155,3 +171,18 @@ helden.duel.InaktivitiEnd=The duel has ended due to inactivity
 helden.actionbar.combatEnd=You are safe again, the fight is over.
 helden.actionbar.combatScreen=§cIn Combat! §i(%ss remaining)
 ## runs/actionbar
+## itemBlock
+helden.ItemBlock.noTridentInCombat=§cYou can't use a trident while in combat!
+helden.ItemBlock.noChestInCombat=§cYou can't open chests while in combat!
+## itemBlock
+
+## events/spawnLeave
+helden.spawnLeave.joinWarden1494=§cCreator §lArian§r §chas just joined!
+helden.spawnLeave.joinJuliosstefen=§9Creator §lJulios§r §9has just joined!
+helden.spawnLeave.joinLionkracher23=§gCreator §lLionkracher§r §ghas just joined!
+## events/spawnLeave
+
+## runs/armorLock
+helden.armorLock.activated=§eArmorlock is active for %s!
+helden.armorLock.ended=§eThe armorlock has expired.
+## runs/armorLock

@@ -9,6 +9,7 @@ item.helden:soul_stealer=§bSeelen Stehler§r
 item.helden:soul_amulet=Seelen Amulet
 item.helden:broken_soul_amulet=Kaputtes Seelen Amulet
 item.helden:krone=Krone
+item.helden:settings_item=§6Einstellungen§r
 ## items
 
 ## helden
@@ -19,14 +20,17 @@ helden.helden.willkommen=§bWillkommen bei Minecraft §lHelden!§r\n\n§ivon Jul
 ## ui
 helden.ui.settingsTitle=§l§6Einstellungen
 helden.ui.toggles=Toggles
+helden.ui.heartSystem=Herzensystem
 helden.ui.limits=Limits
 helden.ui.duel=Duelle
+helden.ui.armorLock=Rüstungssperre
 helden.ui.delete=Löschen
 
 helden.ui.togglesTitle=§l§6Toggles
 helden.ui.debug=Debug-Modus
 helden.ui.loseHeart=Herzverlust
 helden.ui.blockTrident=Dreizack blockieren
+helden.ui.blockChest=Truhen im Kampf blockieren
 helden.ui.showOtherHearts=Herzen anderer Spieler anzeigen
 helden.ui.linkHeart=Link Herzen
 helden.ui.dimension=§l§6Dimensionen
@@ -40,10 +44,20 @@ helden.ui.red=%s §cRot
 helden.ui.pink=%s §dRosa
 helden.ui.purple=%s §5Lila
 helden.ui.save=§l§2Speichern
+helden.ui.next=§l§6Weiter
 
 helden.ui.limitsTitle=§l§6Limits
 helden.ui.cobwebLimit=Spinnennetz-Limit
 helden.ui.enderPearlLimit=Enderperlen-Limit
+
+helden.ui.heartSystemTitle=§l§6Herzensystem
+helden.ui.heartSystemDropdown=Modus
+helden.ui.heartSystemNormal=Normal
+helden.ui.heartSystemLinked=Link Herzen
+
+helden.ui.armorLockSettingsTitle=§l§6Rüstungssperre
+helden.ui.armorLockEnabled=Rüstungssperre aktivieren
+helden.ui.armorLockDuration=Dauer (Minuten)
 
 helden.ui.duelTitle=§l§6Duelle
 helden.ui.enableDuels=Duelle aktivieren
@@ -53,10 +67,12 @@ helden.ui.inactiveDuelTimeout=Inaktive Duelle beenden (Sekunden)
 
 helden.ui.deleteTitle=§l§6Löschen
 helden.ui.hearts=Herzen
+helden.ui.armorLockReset=Armorlock
 helden.ui.players=Spieler
 helden.ui.settings=Einstellungen
 helden.ui.all=Alles
 helden.ui.deleteButton=§l§4Löschen
+
 ## ui
 
 ## command/description
@@ -119,6 +135,7 @@ helden.linkheart.linkedWhite=§6%s§r ist mit §6%s§r verlinkt!
 helden.settings.updates=Einstellungen aktualisiert
 helden.settings.removeLinkheart=Linkhearts gelöscht
 helden.settings.removeHeart=Herzen gelöscht
+helden.settings.removeArmorLock=Rüstungssperre zurückgesetzt
 helden.settings.removeDuel=Duelle gelöscht
 helden.settings.removePlayer=Spielerdaten gelöscht
 helden.settings.removeSettings=Einstellungen gelöscht
@@ -126,15 +143,14 @@ helden.settings.removeAll=Alle Daten wurden gelöscht
 ## commands/settings
 
 ## events/entityHurt/entityHurt
-helden.entityHurt.attacked=Du hast §6%s§r angegriffen
-helden.entityHurt.attacked2=Du wurdest von §6%s§r angegriffen
+helden.entityHurt.attacked=Du hast §a%s§r angegriffen!
+helden.entityHurt.attacked2=Du wurdest von §c%s§r angegriffen!
 ## events/entityHurt/entityHurt
 
 ## events/entityDie
 helden.entityDie.winDuel=§a%s§r hat das Duell gegen §c%s§r gewonnen!
-helden.entityDie.killedFromWhite=§c%s§r wurde von §a%s§r mit §o%s§r eliminiert §c(-1 Leben)
-helden.entityDie.killedFrom=§c%s§r wurde von §a%s§r eliminiert §c(-1 Leben)
-helden.entityDie.die=§c%s§r ist gestorben §c(-1 Leben)
+helden.entityDie.killedFromWhite=§c%s§r wurde im Kampf von §a%s§r mit §o%s§r getötet §c(-1 Leben)
+helden.entityDie.killedFrom=§c%s§r wurde im Kampf von §a%s§r getötet §c(-1 Leben)
 ## events/entityDie
 
 ## events/InteractPlace
@@ -155,3 +171,19 @@ helden.duel.InaktivitiEnd=Das Duell wurde wegen inaktivität beendet!
 helden.actionbar.combatEnd=Du bist wieder sicher, der Kampf ist vorbei!
 helden.actionbar.combatScreen=§cIm Kampf! §i(%ss übrig)
 ## runs/actionbar
+
+## itemBlock
+helden.ItemBlock.noTridentInCombat=§cDu kannst im Kampf keinen Dreizack benutzen!
+helden.ItemBlock.noChestInCombat=§cDu kannst im Kampf keine Truhen öffnen!
+## itemBlock
+
+## events/spawnLeave
+helden.spawnLeave.joinWarden1494=§cDer Creator §lArian§r §cist soeben beigetreten!
+helden.spawnLeave.joinJuliosstefen=§9Der Creator §lJulios§r §9ist soeben beigetreten!
+helden.spawnLeave.joinLionkracher23=§gDer Creator §lLionkracher§r §gist soeben beigetreten!
+## events/spawnLeave
+
+## runs/armorLock
+helden.armorLock.activated=§eArmorlock ist für %s aktiv!
+helden.armorLock.ended=§eDer Armorlock ist abgelaufen.
+## runs/armorLock

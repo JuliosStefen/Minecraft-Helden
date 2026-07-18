@@ -1,6 +1,7 @@
 import { aktiveDuel, setDuel } from '../../function/duel';
 import { world, system } from '@minecraft/server';
 import { sendMessage } from '../../runs/run';
+import { startArmorLock, hatAusgeruestetenSchutz, gesperrteRuestungDroppen } from '../../runs/armorLock';
 import { heldenSave } from '../../function/heldenSave';
 import { setCombat } from './setCombat';
 import { setHeart } from '../../function/setHeart';
@@ -85,6 +86,14 @@ world.afterEvents.entityHurt.subscribe(({ damageSource, hurtEntity }) => {
 
                     setCombat(damage.name, damage);
                     setCombat(hurt.name, hurt);
+
+                    hurtSave.lastAttacker = damage.name
+
+                    if (setts?.armorLock === undefined || setts.armorLock) {
+
+                        startArmorLock(damage.name)
+                        startArmorLock(hurt.name)
+                    }
                 }
             }
         }
@@ -96,7 +105,13 @@ world.afterEvents.entityHurt.subscribe(({ damageSource, hurtEntity }) => {
                 setCombat(hurt.nameTag, hurt)
 
                 if (damage?.typeId === 'minecraft:player') {
+
                     setCombat(damage.name, damage);
+
+                    if (setts?.armorLock === undefined || setts.armorLock) {
+
+                        startArmorLock(damage.name)
+                    }
                 }
             }
 
@@ -128,6 +143,23 @@ world.beforeEvents.entityHurt.subscribe((event) => {
 
                 event.cancel = true
             }
+        }
+    }
+
+    if (hurtEntity.typeId === 'minecraft:player' && event.cancel !== true) {
+
+        const playerSave = heldenSave().player[hurtEntity.name]
+        const health = hurtEntity.getComponent('health')?.currentValue ?? 0
+
+        if (health - event.damage <= 0 && playerSave?.armorLockEnd > Date.now() && hatAusgeruestetenSchutz(hurtEntity)) {
+
+            event.cancel = true
+
+            system.run(() => {
+
+                gesperrteRuestungDroppen(hurtEntity)
+                hurtEntity.kill()
+            })
         }
     }
 })

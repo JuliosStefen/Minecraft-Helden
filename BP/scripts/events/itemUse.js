@@ -1,4 +1,5 @@
 import { playerLimit, sendMessage } from '../runs/run';
+import { settings } from '../commands/settings';
 import { world, system } from '@minecraft/server';
 import { heldenSave } from '../function/heldenSave';
 
@@ -21,9 +22,18 @@ world.beforeEvents.itemUse.subscribe((event) => {
 
                 for (const enchantment of itemStack.getComponent('enchantable').getEnchantments()) {
 
-                    if (enchantment.type.id === 'riptide') event.cancel = true;
+                    if (enchantment.type.id === 'riptide') {
+
+                        event.cancel = true;
+                        sendMessage('helden.ItemBlock.noTridentInCombat', { name: source.name })
+                    }
                 }
             }
+        }
+
+        if (itemStack.typeId === 'helden:settings_item') {
+
+            settings({ sourceEntity: source })
         }
 
         if (itemStack.typeId === 'helden:soul_amulet') {
