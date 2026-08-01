@@ -151,7 +151,7 @@ world.beforeEvents.entityHurt.subscribe((event) => {
         const playerSave = heldenSave().player[hurtEntity.name]
         const health = hurtEntity.getComponent('health')?.currentValue ?? 0
 
-        if (health - event.damage <= 0 && playerSave?.armorLockEnd > Date.now() && hatAusgeruestetenSchutz(hurtEntity)) {
+        if (health <= 0 && playerSave?.armorLockEnd > Date.now() && hatAusgeruestetenSchutz(hurtEntity)) {
 
             event.cancel = true
 
