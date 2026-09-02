@@ -1,4 +1,5 @@
 import { setNameTag, randomLink } from '../../runs/run';
+import { headhuntSpielerBereit } from '../../function/headhunt';
 import { resumeArmorLock } from '../../runs/armorLock';
 import { world, system } from '@minecraft/server';
 import { installPlayer } from '../../runs/install';
@@ -34,10 +35,17 @@ world.afterEvents.playerSpawn.subscribe(({ initialSpawn, player }) => {
                 randomLink[player.name] = player.name
             }
 
+            const setts = heldenSave().settings
+
+            if (setts?.headhunt) {
+
+                headhuntSpielerBereit(player.name)
+            }
+
             player.sendMessage({ translate: 'helden.helden.willkommen' });
 
             const spielerjoin = {
-                "Warden1494": "helden.spawnLeave.joinWarden1494",
+                "ArianXo31": "helden.spawnLeave.joinArianXo31",
                 "JuliosStefen": "helden.spawnLeave.joinJuliosstefen",
                 "Lionkracher23": "helden.spawnLeave.joinLionkracher23"
             }

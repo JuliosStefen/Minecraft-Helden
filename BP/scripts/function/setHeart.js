@@ -22,7 +22,7 @@ export function setHeart(name, hearts) {
         }
     }
 
-    if (heart >= 0 && heart <= 4) {
+    if (heart >= 0 && heart <= 5) {
 
         if (setts?.linkheart === undefined || setts?.linkheart) {
 

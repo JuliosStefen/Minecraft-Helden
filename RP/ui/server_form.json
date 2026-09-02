@@ -1,0 +1,6 @@
+{
+    "namespace": "server_form",
+    "custom_input@settings_common.option_text_edit": {
+        "$max_text_edit_length": 999999999
+    }
+}

@@ -32,6 +32,7 @@ helden.ui.loseHeart=Heart Loss
 helden.ui.blockTrident=Block Tridents
 helden.ui.blockChest=Block Chests In Combat
 helden.ui.showOtherHearts=Show Other Players' Hearts
+helden.ui.showHeadhunt=Show Headhunt Target
 helden.ui.linkHeart=Link Hearts
 helden.ui.dimension=§l§6Dimensions
 helden.ui.theEnd=The End
@@ -54,6 +55,7 @@ helden.ui.heartSystemTitle=§l§6Heart System
 helden.ui.heartSystemDropdown=Mode
 helden.ui.heartSystemNormal=Normal
 helden.ui.heartSystemLinked=Link Hearts
+helden.ui.heartSystemHeadhunt=Headhunt
 
 helden.ui.armorLockSettingsTitle=§l§6Armor Lock
 helden.ui.armorLockEnabled=Enable armor lock
@@ -68,6 +70,8 @@ helden.ui.inactiveDuelTimeout=End Inactive Duels (Seconds)
 helden.ui.deleteTitle=§l§6Delete
 helden.ui.hearts=Hearts
 helden.ui.armorLockReset=Armorlock
+helden.ui.headhuntReset=Headhunt
+helden.ui.combatlogReset=Combatlog
 helden.ui.players=Players
 helden.ui.settings=Settings
 helden.ui.all=All
@@ -136,6 +140,8 @@ helden.settings.updates=Settings updated
 helden.settings.removeLinkheart=Link Hearts removed
 helden.settings.removeHeart=Hearts removed
 helden.settings.removeArmorLock=Armor lock reset
+helden.settings.removeHeadhunt=Headhunt reset
+helden.settings.removeCombatlog=Combatlog reset
 helden.settings.removeDuel=Duels removed
 helden.settings.removePlayer=Player data deleted
 helden.settings.removeSettings=Settings deleted
@@ -177,7 +183,7 @@ helden.ItemBlock.noChestInCombat=§cYou can't open chests while in combat!
 ## itemBlock
 
 ## events/spawnLeave
-helden.spawnLeave.joinWarden1494=§cCreator §lArian§r §chas just joined!
+helden.spawnLeave.joinArianXo31=§cCreator §lArian§r §chas just joined!
 helden.spawnLeave.joinJuliosstefen=§9Creator §lJulios§r §9has just joined!
 helden.spawnLeave.joinLionkracher23=§gCreator §lLionkracher§r §ghas just joined!
 ## events/spawnLeave
@@ -186,3 +192,8 @@ helden.spawnLeave.joinLionkracher23=§gCreator §lLionkracher§r §ghas just joi
 helden.armorLock.activated=§eArmorlock is active for %s!
 helden.armorLock.ended=§eThe armorlock has expired.
 ## runs/armorLock
+
+## function/headhunt
+helden.headhunt.won=§eYou won the headhunt against §c%s§e and claimed your 4th heart!
+helden.headhunt.wonBroadcast=§6%s§r won the headhunt against §c%s§r!
+## function/headhunt

@@ -1,5 +1,6 @@
-import { setNameTag, sendMessage, randomLink } from '../runs/run';
+import { setNameTag, sendMessage, randomLink, playerLimit } from '../runs/run';
 import { resetAllArmorLocks } from '../runs/armorLock';
+import { headhuntSpielerBereit, headhuntZuruecksetzen } from '../function/headhunt';
 import { ActionFormData, ModalFormData } from '@minecraft/server-ui';
 import { world, system } from '@minecraft/server';
 import { installPlayer } from '../runs/install'
@@ -30,13 +31,24 @@ export function settings(senders) {
                 const heartSystem = new ModalFormData();
 
                 heartSystem.title('helden.ui.heartSystemTitle')
-                    .dropdown('helden.ui.heartSystemDropdown', [{ translate: 'helden.ui.heartSystemNormal' }, { translate: 'helden.ui.heartSystemLinked' }], { defaultValueIndex: setts?.linkheart ? 1 : 0 })
+                    .dropdown('helden.ui.heartSystemDropdown', [{ translate: 'helden.ui.heartSystemNormal' }, { translate: 'helden.ui.heartSystemLinked' }, { translate: 'helden.ui.heartSystemHeadhunt' }], { defaultValueIndex: setts?.headhunt ? 2 : (setts?.linkheart ? 1 : 0) })
+                    .toggle('helden.ui.showHeadhunt', { defaultValue: setts?.showHeadhunt ?? false })
                     .submitButton('helden.ui.save')
                 heartSystem.show(sender).then((r) => {
 
                     if (r.canceled) return;
 
                     setts.linkheart = (r.formValues[0] == 1)
+                    setts.headhunt = (r.formValues[0] == 2)
+                    setts.showHeadhunt = r.formValues[1]
+
+                    if (setts.headhunt) {
+
+                        world.getPlayers().forEach(player => {
+
+                            headhuntSpielerBereit(player.name);
+                        })
+                    }
 
                     world.getPlayers().forEach(player => {
 
@@ -163,6 +175,8 @@ export function settings(senders) {
                     .toggle('helden.ui.hearts')
                     .toggle('helden.ui.duel')
                     .toggle('helden.ui.armorLockReset')
+                    .toggle('helden.ui.headhuntReset')
+                    .toggle('helden.ui.combatlogReset')
                     .toggle('helden.ui.players')
                     .toggle('helden.ui.settings')
                     .toggle('helden.ui.all')
@@ -207,21 +221,45 @@ export function settings(senders) {
 
                     if (r.formValues[4]) {
 
-                        heldenSave().player = {}
+                        headhuntZuruecksetzen()
 
-                        sendMessage('helden.settings.removePlayer', { name: sender.name })
+                        sendMessage('helden.settings.removeHeadhunt', { name: sender.name })
                     }
 
                     if (r.formValues[5]) {
 
-                        heldenSave().settings = {}
-                        sendMessage('helden.settings.removeSettings', { name: sender.name })
+                        for (const name in heldenSave().player) {
+                            delete heldenSave().player[name].combatlog
+                        }
+
+                        for (const name in playerLimit) {
+                            delete playerLimit[name]
+                        }
+
+                        sendMessage('helden.settings.removeCombatlog', { name: sender.name })
                     }
 
                     if (r.formValues[6]) {
 
                         heldenSave().player = {}
+
+                        sendMessage('helden.settings.removePlayer', { name: sender.name })
+                    }
+
+                    if (r.formValues[7]) {
+
                         heldenSave().settings = {}
+                        heldenSave().settings.linkheart = false
+                        heldenSave().settings.headhunt = true
+                        sendMessage('helden.settings.removeSettings', { name: sender.name })
+                    }
+
+                    if (r.formValues[8]) {
+
+                        heldenSave().player = {}
+                        heldenSave().settings = {}
+                        heldenSave().settings.linkheart = false
+                        heldenSave().settings.headhunt = true
 
                         sendMessage('helden.settings.removeAll', { name: sender.name })
                     }

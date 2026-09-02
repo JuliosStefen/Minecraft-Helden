@@ -5,6 +5,7 @@ import { releaseArmorLock } from '../../runs/armorLock';
 import { heldenSave } from '../../function/heldenSave';
 import { playDeath } from '../../function/deathAnimation';
 import { setHeart } from '../../function/setHeart';
+import { istHeadhuntKill, headhuntKillVerarbeiten } from '../../function/headhunt';
 
 import { deathMessage } from './deathMessage'
 
@@ -53,7 +54,16 @@ world.afterEvents.entityDie.subscribe(({ deadEntity, damageSource }) => {
                     if (deadSave?.combatlog >= 0.500 || damager?.typeId === 'minecraft:player') {
 
                         deathMessage(deadEntity, damager, deadSave.lastAttacker)
-                        setHeart(deadEntity.name, (deadSave.heart - 1))
+
+                        if (setts?.headhunt && setts?.showHeadhunt && damager?.typeId === 'minecraft:player' && istHeadhuntKill(damager.name, deadEntity.name)) {
+
+                            headhuntKillVerarbeiten(damager.name, deadEntity.name)
+
+                        } else {
+
+                            setHeart(deadEntity.name, (deadSave.heart - 1))
+                        }
+
                         playDeath(deadEntity);
                     }
                 }

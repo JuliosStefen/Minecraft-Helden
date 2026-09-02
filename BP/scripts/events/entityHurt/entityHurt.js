@@ -1,7 +1,7 @@
+import { startArmorLock, hatAusgeruestetenSchutz, gesperrteRuestungDroppen } from '../../runs/armorLock';
 import { aktiveDuel, setDuel } from '../../function/duel';
 import { world, system } from '@minecraft/server';
 import { sendMessage } from '../../runs/run';
-import { startArmorLock, hatAusgeruestetenSchutz, gesperrteRuestungDroppen } from '../../runs/armorLock';
 import { heldenSave } from '../../function/heldenSave';
 import { setCombat } from './setCombat';
 import { setHeart } from '../../function/setHeart';

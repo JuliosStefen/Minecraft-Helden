@@ -32,6 +32,7 @@ helden.ui.loseHeart=Herzverlust
 helden.ui.blockTrident=Dreizack blockieren
 helden.ui.blockChest=Truhen im Kampf blockieren
 helden.ui.showOtherHearts=Herzen anderer Spieler anzeigen
+helden.ui.showHeadhunt=Headhunt-Ziel anzeigen
 helden.ui.linkHeart=Link Herzen
 helden.ui.dimension=§l§6Dimensionen
 helden.ui.theEnd=The End
@@ -54,6 +55,7 @@ helden.ui.heartSystemTitle=§l§6Herzensystem
 helden.ui.heartSystemDropdown=Modus
 helden.ui.heartSystemNormal=Normal
 helden.ui.heartSystemLinked=Link Herzen
+helden.ui.heartSystemHeadhunt=Headhunt
 
 helden.ui.armorLockSettingsTitle=§l§6Rüstungssperre
 helden.ui.armorLockEnabled=Rüstungssperre aktivieren
@@ -68,6 +70,8 @@ helden.ui.inactiveDuelTimeout=Inaktive Duelle beenden (Sekunden)
 helden.ui.deleteTitle=§l§6Löschen
 helden.ui.hearts=Herzen
 helden.ui.armorLockReset=Armorlock
+helden.ui.headhuntReset=Headhunt
+helden.ui.combatlogReset=Combatlog
 helden.ui.players=Spieler
 helden.ui.settings=Einstellungen
 helden.ui.all=Alles
@@ -136,6 +140,8 @@ helden.settings.updates=Einstellungen aktualisiert
 helden.settings.removeLinkheart=Linkhearts gelöscht
 helden.settings.removeHeart=Herzen gelöscht
 helden.settings.removeArmorLock=Rüstungssperre zurückgesetzt
+helden.settings.removeHeadhunt=Headhunt zurückgesetzt
+helden.settings.removeCombatlog=Combatlog zurückgesetzt
 helden.settings.removeDuel=Duelle gelöscht
 helden.settings.removePlayer=Spielerdaten gelöscht
 helden.settings.removeSettings=Einstellungen gelöscht
@@ -178,7 +184,7 @@ helden.ItemBlock.noChestInCombat=§cDu kannst im Kampf keine Truhen öffnen!
 ## itemBlock
 
 ## events/spawnLeave
-helden.spawnLeave.joinWarden1494=§cDer Creator §lArian§r §cist soeben beigetreten!
+helden.spawnLeave.joinArianXo31=§cDer Creator §lArian§r §cist soeben beigetreten!
 helden.spawnLeave.joinJuliosstefen=§9Der Creator §lJulios§r §9ist soeben beigetreten!
 helden.spawnLeave.joinLionkracher23=§gDer Creator §lLionkracher§r §gist soeben beigetreten!
 ## events/spawnLeave
@@ -187,3 +193,8 @@ helden.spawnLeave.joinLionkracher23=§gDer Creator §lLionkracher§r §gist soeb
 helden.armorLock.activated=§eArmorlock ist für %s aktiv!
 helden.armorLock.ended=§eDer Armorlock ist abgelaufen.
 ## runs/armorLock
+
+## function/headhunt
+helden.headhunt.won=§eDu hast den Headhunt gegen §c%s§e gewonnen und dein 4. Herz erbeutet!
+helden.headhunt.wonBroadcast=§6%s§r hat den Headhunt gegen §c%s§r gewonnen!
+## function/headhunt
