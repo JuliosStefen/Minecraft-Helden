@@ -1,9 +1,9 @@
-<h1><strong><a href="https://discord.gg/vSf4WSQRfm" target="_blank" rel="nofollow"><img src="https://media.forgecdn.net/attachments/description/1268676/description_86653b82-f42a-4f7b-8560-7fabeed44499.png" width="111" height="44"></a></strong></h1>
-<h1>&nbsp;</h1>
-<h1><strong><img style="display:block;margin-left:auto;margin-right:auto" src="https://media.forgecdn.net/attachments/description/1256108/description_44e0bb19-fe9b-4e87-a046-f986fa82a3ce.png" width="500" height="161"></strong></h1>
-<h1>&nbsp;</h1>
+<p style="text-align:center"><a href="https://discord.gg/vSf4WSQRfm" target="_blank" rel="nofollow"><img src="https://img.shields.io/discord/1384949383166034065?logo=discord&amp;label=Discord" alt="" width="167" height="25"></a><a href="https://www.curseforge.com/minecraft-bedrock/addons/m-helden-bedrock" target="_blank" rel="nofollow"><img src="https://img.shields.io/curseforge/dt/1256108?logo=curseforge&amp;label=CurseForge" alt="" width="152" height="25"></a><a href="https://github.com/JuliosStefen/Minecraft-Helden" target="_blank" rel="nofollow"><img src="https://img.shields.io/github/downloads/JuliosStefen/Minecraft-Helden/total?logo=Github&amp;label=Github" alt="" width="102" height="25"></a></p>
+<p>&nbsp;</p>
+<h1><img style="display:block;margin-left:auto;margin-right:auto" src="https://media.forgecdn.net/attachments/description/1256108/description_44e0bb19-fe9b-4e87-a046-f986fa82a3ce.png" width="484" height="156"></h1>
+<p>&nbsp;</p>
 <h1><strong>What is Helden?</strong></h1>
-<p>Es gab ein YouTuber-Projekt namens „Minecraft Heroes“. Nach dessen Ende stand lediglich ein Download für die Minecraft-Java-Edition zur Verfügung, da die Entwickler kein offizielles Add-on für die Bedrock-Edition erstellt hatten. Für alle, die „Heroes“ nicht kennen: Das Konzept sieht vor, dass alle Spieler mit insgesamt drei Herzen sowie einem sogenannten „Link-Herz“ starten; verliert ein Spieler sein Leben, büßt er ein Herz ein. Loggt sich ein Spieler während eines Kampfes aus, verliert er zwar nicht sofort ein Herz, doch es erscheint ein Dummy, der seine Ausrüstung bei sich trägt; wird dieser Dummy getötet, verliert der Spieler dennoch sein Herz und seine Beute. Fällt ein Spieler auf sein Link-Herz zurück, teilt er sich dieses mit einem zufälligen anderen Spieler auf dem Server; geht dieses Herz verloren, verliert auch der Partner ein Herz. Der Verlust sämtlicher Herzen führt dazu, dass man entweder in den Zuschauermodus versetzt oder vom Server geworfen wird.</p>
+<p>There was a YouTuber project called "Minecraft Heroes." When it ended, only a download for the Minecraft Java Edition was available, as the developers had not created an official add-on for the Bedrock Edition. For those unfamiliar with "Heroes": the concept involves players starting with a total of three hearts plus a so-called "link heart"; if a player loses a life, they forfeit one heart. If a player logs out during combat, they do not immediately lose a heart, but a dummy carrying their equipment appears; if this dummy is killed, the player still loses their heart and their loot. If a player is reduced to their link heart, they share it with a random other player on the server; if this heart is lost, the partner loses a heart as well. Losing all hearts results in the player either being switched to spectator mode or kicked from the server.</p>
 <p>&nbsp;</p>
 <h1><strong>languages</strong></h1>
 <p>This add-on supports German and English in-game.</p>
@@ -13,7 +13,6 @@
 <p><img src="https://media.forgecdn.net/attachments/description/1256108/description_52b4a000-f5db-4bcd-9aab-34d4fbc093d3.png"></p>
 <p>2. activate the addon in the world</p>
 <p><img src="https://media.forgecdn.net/attachments/description/1256108/description_412635d1-717a-43c8-beb1-9667113e831c.png"></p>
-<p>&nbsp;</p>
 <p>3. You are now ready and can now go into the world</p>
 <p>&nbsp;</p>
 <h1 style="text-align:center"><strong>heards</strong></h1>
