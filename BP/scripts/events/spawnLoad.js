@@ -29,12 +29,5 @@ function entityFunktion(entity) {
     }
 }
 
-world.afterEvents.entityLoad.subscribe(({ entity }) => {
-
-    entityFunktion(entity);
-})
-
-world.afterEvents.entitySpawn.subscribe(({ entity }) => {
-
-    entityFunktion(entity);
-})
+world.afterEvents.entityLoad.subscribe(({ entity }) => entityFunktion(entity))
+world.afterEvents.entitySpawn.subscribe(({ entity }) => entityFunktion(entity))

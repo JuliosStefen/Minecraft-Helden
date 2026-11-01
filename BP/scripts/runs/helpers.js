@@ -6,7 +6,7 @@ export function sendMessage(translate, { withs = [], name } = {}) {
 
         let withss = []
 
-        for (const one of withs) { withss.push(String(one)) }
+        for (const one of withs) withss.push(String(one))
 
         const message = { rawtext: [{ text: '[§bHelden§r] ' }, { translate, with: withss }] }
 
@@ -41,8 +41,15 @@ export function lockArmor(name, mode) {
 
                 if (item) {
 
-                    item.lockMode = mode
-                    player.getComponent('equippable').setEquipment(slot, item);
+                    if (item.typeId == `helden:${slot.toLowerCase()}_lock` && mode == 'none') {
+
+                        player.getComponent('equippable').setEquipment(slot, undefined);
+
+                    } else {
+
+                        item.lockMode = mode
+                        player.getComponent('equippable').setEquipment(slot, item);
+                    }
                 }
             }
 

@@ -4,7 +4,6 @@ import { heldenSave } from '../../function/heldenSave';
 export function setCombat(name, entity) {
 
     const entitySave = heldenSave().player[name]
-
     const heart = entity.getComponent('health').currentValue;
 
     let combatTime;

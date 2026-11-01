@@ -3,7 +3,7 @@
 	"animations": {
 		"animation.krone": {
 			"loop": true,
-			"animation_length": 2,
+			"animation_length": 20,
 			"bones": {
 				"krone": {
 					"rotation": {
@@ -12,22 +12,22 @@
 							0,
 							0
 						],
-						"0.5": [
+						"5.0": [
 							0,
 							-90,
 							0
 						],
-						"1.0": [
+						"10.0": [
 							0,
 							-180,
 							0
 						],
-						"1.5": [
+						"15.0": [
 							0,
 							-270,
 							0
 						],
-						"2.0": [
+						"20.0": [
 							0,
 							-360,
 							0

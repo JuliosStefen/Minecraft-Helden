@@ -24,12 +24,13 @@ world.afterEvents.playerPlaceBlock.subscribe(({ player, block }) => {
 world.beforeEvents.playerInteractWithBlock.subscribe((event) => {
 
     const player = event.player
-    const block = event.itemStack
+    const blockId = event.block.typeId
+    const itemStack = event.itemStack
 
     const setts = heldenSave().settings
     const playerSave = heldenSave().player[player.name];
 
-    if (block?.typeId === 'minecraft:web' && (setts?.web_limitEna == undefined || setts?.web_limitEna)) {
+    if (itemStack?.typeId === 'minecraft:web' && (setts?.web_limitEna == undefined || setts?.web_limitEna)) {
 
         if (playerSave?.combatlog >= 0) {
 
@@ -44,7 +45,19 @@ world.beforeEvents.playerInteractWithBlock.subscribe((event) => {
         }
     }
 
-    if ((event.block?.typeId === 'minecraft:chest' || event.block?.typeId === 'minecraft:trapped_chest' || event.block?.typeId === 'minecraft:ender_chest') && (setts?.blockChest === undefined || setts.blockChest)) {
+    if ((setts?.blockChest === undefined || setts.blockChest) && (
+        blockId == 'minecraft:barrel' ||
+        blockId == 'minecraft:copper_chest' ||
+        blockId == 'minecraft:exposed_copper_chest' ||
+        blockId == 'minecraft:oxidized_copper_chest' ||
+        blockId == 'minecraft:waxed_copper_chest' ||
+        blockId == 'minecraft:waxed_exposed_copper_chest' ||
+        blockId == 'minecraft:waxed_oxidized_copper_chest' ||
+        blockId == 'minecraft:waxed_weathered_copper_chest' ||
+        blockId == 'minecraft:weathered_copper_chest' ||
+        blockId == 'minecraft:chest' ||
+        blockId == 'minecraft:trapped_chest' ||
+        blockId == 'minecraft:ender_chest')) {
 
         if (playerSave?.combatlog >= 0) {
 

@@ -1,62 +1,45 @@
-import { setNameTag, randomLink } from '../../runs/run';
-import { headhuntSpielerBereit } from '../../function/headhunt';
+import { setNameTag, randomPartner } from '../../runs/run';
 import { resumeArmorLock } from '../../runs/armorLock';
 import { world, system } from '@minecraft/server';
-import { installPlayer } from '../../runs/install';
-import { setLinkheart } from '../../function/setLinkheart';
+import { setPartner } from '../../function/setPartner';
 import { spawnDummy } from './spawnDummy';
 import { heldenSave } from '../../function/heldenSave';
 import { stopDeath } from '../../function/deathAnimation';
+import { maxHeart } from '../../function/heart';
 import { synDummy } from './synDummy';
 
 world.afterEvents.playerSpawn.subscribe(({ initialSpawn, player }) => {
 
-    system.run(() => {
+    const playerSave = heldenSave().player[player.name] ??= {}
 
-        const playerSave = heldenSave().player[player.name]
+    resumeArmorLock(player.name)
+    stopDeath(player);
 
-        resumeArmorLock(player.name)
+    if (playerSave?.banbydeath == false && playerSave.heart <= 0) player.setGameMode('Spectator');
 
-        stopDeath(player);
+    if (initialSpawn) {
 
-        if (playerSave?.banbydeath == false && playerSave.heart <= 0) {
+        if (playerSave?.partner == undefined) randomPartner[player.name] = player.name
 
-            player.setGameMode('Spectator');
+        if (!playerSave?.combatlog) player.removeTag('in_combat');
+
+        playerSave.heart ??= maxHeart().def
+
+        setNameTag(player.name);
+        synDummy(player);
+
+        player.sendMessage({ translate: 'helden.helden.willkommen' });
+
+        const spielerjoin = {
+            "ArianXo12": "helden.spawnLeave.joinArianXo12",
+            "JuliosStefen": "helden.spawnLeave.joinJuliosstefen",
+            "Lionkracher23": "helden.spawnLeave.joinLionkracher23"
         }
 
-        if (initialSpawn) {
+        const nachrichtKey = spielerjoin[player.name]
 
-            installPlayer(player.name);
-            setNameTag(player.name);
-            synDummy(player);
-
-            if (playerSave?.linkheart == undefined) {
-
-                randomLink[player.name] = player.name
-            }
-
-            const setts = heldenSave().settings
-
-            if (setts?.headhunt) {
-
-                headhuntSpielerBereit(player.name)
-            }
-
-            player.sendMessage({ translate: 'helden.helden.willkommen' });
-
-            const spielerjoin = {
-                "ArianXo31": "helden.spawnLeave.joinArianXo31",
-                "JuliosStefen": "helden.spawnLeave.joinJuliosstefen",
-                "Lionkracher23": "helden.spawnLeave.joinLionkracher23"
-            }
-
-            const nachrichtKey = spielerjoin[player.name]
-
-            if (nachrichtKey) {
-                world.sendMessage({ translate: nachrichtKey })
-            }
-        }
-    })
+        if (nachrichtKey) world.sendMessage({ translate: nachrichtKey })
+    }
 })
 
 export let inventory = {}
@@ -71,19 +54,19 @@ world.beforeEvents.playerLeave.subscribe(({ player }) => {
 
         const loadLinks = system.runInterval(() => {
 
-            const linkLength = Object.values(randomLink).length
+            const linkLength = Object.values(randomPartner).length
 
             if (linkLength >= 2) {
 
-                const partner1 = Object.values(randomLink)[Math.floor(Math.random() * linkLength)]
-                const partner2 = Object.values(randomLink)[Math.floor(Math.random() * linkLength)]
+                const partner1 = Object.values(randomPartner)[Math.floor(Math.random() * linkLength)]
+                const partner2 = Object.values(randomPartner)[Math.floor(Math.random() * linkLength)]
 
                 if (partner1 !== partner2) {
 
-                    setLinkheart(partner1, partner2);
+                    setPartner(partner1, partner2);
 
-                    delete randomLink[partner1]
-                    delete randomLink[partner2]
+                    delete randomPartner[partner1]
+                    delete randomPartner[partner2]
                 }
 
             } else {

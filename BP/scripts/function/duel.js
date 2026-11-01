@@ -7,21 +7,16 @@ let timeout = {}
 
 function end(name) {
 
-    system.run(() => {
+    const setts = heldenSave().settings
 
-        const setts = heldenSave().settings
+    if (timeout[name]) system.clearRun(timeout[name])
 
-        if (timeout[name]) {
-            system.clearRun(timeout[name])
-        }
+    timeout[name] = system.runTimeout(() => {
 
-        timeout[name] = system.runTimeout(() => {
+        sendMessage('helden.duel.InaktivitiEnd', { name });
+        delete aktiveDuel[name]
 
-            sendMessage('helden.duel.InaktivitiEnd', { name });
-            delete aktiveDuel[name]
-
-        }, 20 * Number(setts?.inactiveDuel ?? 200))
-    })
+    }, 20 * Number(setts?.inactiveDuel ?? 200))
 }
 
 export function setDuel(name1, name2) {
@@ -42,4 +37,7 @@ export function duelEnd(name) {
 
     system.clearRun(timeout[duelName]);
     system.clearRun(timeout[name]);
+
+    delete timeout[duelName]
+    delete timeout[name]
 }

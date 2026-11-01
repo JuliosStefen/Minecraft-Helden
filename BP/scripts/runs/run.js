@@ -1,20 +1,14 @@
 import { world, system } from '@minecraft/server';
-import { installSave } from './install.js';
 import { heldenSave } from '../function/heldenSave';
-
 
 import '../commands/registry';
 import '../events/event';
 import './actionbar';
 import './armorLock';
 
-installSave();
-
 system.run(() => {
 
     const setts = heldenSave().settings
-
-    world.gameRules.showDeathMessages = false;
 
     if (setts.debug == true) {
 
@@ -22,18 +16,20 @@ system.run(() => {
         world.sendMessage(`§l§6Save: §r§a${world.getDynamicProperty('heldenSave')}\n\n`);
     }
 
+    world.gameRules.showDeathMessages = true;
+
     world.getPlayers().forEach((player) => {
 
         const playerSave = heldenSave().player[player.name]
 
-        if (playerSave?.linkheart == undefined) {
+        if (playerSave?.partner == undefined) {
 
-            randomLink[player.name] = player.name
+            randomPartner[player.name] = player.name
         }
     })
 })
 
-export let playerLimit = {}, randomLink = {}
+export let playerLimit = {}, randomPartner = {}
 
 export const banReason = '§l[§bMCHelden§r§l]§r\n\nDu hast alle Herzen verloren und bist damit aus dem\nProjekt §l§causgeschieden!'
 
@@ -76,31 +72,30 @@ export function setNameTag(name) {
 
             } else if (setts?.showOtherheart) {
 
-                let nameTag;
-                const linkheart = playerSave?.linkheart ?? '§cKein link'
+                let nameTag, heart = playerSave.heart
+                const partner = playerSave?.partner ?? '§cKein link'
 
-                switch (playerSave.heart) {
-                    case 4: {
-                        nameTag = show + show + show
+                if (setts?.heartMode == 1) heart--
+
+                switch (heart) {
+
+                    case 4: nameTag = show + show + show + show
                         break;
-                    }
-                    case 3: {
-                        nameTag = show + show + hide
+
+                    case 3: nameTag = show + show + show
                         break;
-                    }
-                    case 2: {
-                        nameTag = show + hide + hide
+
+                    case 2: nameTag = show + show + hide
                         break;
-                    }
-                    case 1: {
-                        nameTag = `${h1} ${linkheart} ${h2}`
+
+                    case 1: nameTag = show + hide + hide
                         break;
-                    }
-                    case 0: {
-                        nameTag = '\uE205\uE204'
+
+                    case 0: nameTag = '\uE205\uE204'
                         break;
-                    }
                 }
+
+                if (setts?.heartMode == 1 && playerSave.heart == 1) nameTag = `${h1} ${partner} ${h2}`
 
                 player.nameTag = `${player.name}\n${nameTag}`
             }

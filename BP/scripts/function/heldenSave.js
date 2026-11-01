@@ -7,11 +7,15 @@ export function heldenSave(direct) {
     if (tempSave == undefined) {
 
         tempSave = JSON.parse(world?.getDynamicProperty('heldenSave') ?? '{}');
+
+        tempSave.settings ??= {}
+        tempSave.player ??= {}
     }
 
-    if (direct) { tempSave = JSON.parse(direct) }
+    if (direct) tempSave = JSON.parse(direct)
 
     system.runTimeout(() => {
+
         world.setDynamicProperty('heldenSave', JSON.stringify(tempSave));
     }, 5)
 

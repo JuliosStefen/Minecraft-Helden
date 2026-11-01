@@ -14,6 +14,9 @@
 		},
 		"settings_item": {
 			"textures": "textures/items/settings_item"
+		},
+		"armor_lock": {
+			"textures": "textures/blocks/barrier"
 		}
 	}
 }

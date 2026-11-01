@@ -1,126 +1,145 @@
 import { startArmorLock, hatAusgeruestetenSchutz, gesperrteRuestungDroppen } from '../../runs/armorLock';
 import { aktiveDuel, setDuel } from '../../function/duel';
-import { world, system } from '@minecraft/server';
+import { world, system, EquipmentSlot, ItemStack } from '@minecraft/server';
 import { sendMessage } from '../../runs/run';
 import { heldenSave } from '../../function/heldenSave';
 import { setCombat } from './setCombat';
-import { setHeart } from '../../function/setHeart';
+import { setHeart } from '../../function/heart';
 
-world.afterEvents.entityHurt.subscribe(({ damageSource, hurtEntity }) => {
+world.afterEvents.entityHurt.subscribe(({ damageSource, hurtEntity }) => system.run(() => {
 
-    system.run(() => {
+    const damage = damageSource.damagingEntity;
+    const hurt = hurtEntity;
 
-        const damage = damageSource.damagingEntity;
-        const hurt = hurtEntity;
+    const hurtSave = heldenSave().player[hurt.name]
+    const damageSave = heldenSave().player[damage?.name]
 
-        const hurtSave = heldenSave().player[hurt.name]
-        const damageSave = heldenSave().player[damage?.name]
+    const setts = heldenSave().settings
 
-        const setts = heldenSave().settings
+    if (hurt?.typeId == 'minecraft:player') {
 
-        if (damage?.typeId === 'minecraft:player') {
+        const equ = hurt.getComponent('equippable')
 
-            const head = damage.getComponent('minecraft:equippable').getEquipment('Head');
+        function lockEmptySlot(slot) {
 
-            if (head?.typeId === 'krone:helden') {
+            const itemStack = new ItemStack(`helden:${slot.toLowerCase()}_lock`)
+            itemStack.lockMode = 'slot'
 
-                const loc = hurtEntity.location;
-
-                for (let i = 0; i < 10; i++) {
-
-                    const x = (Math.random() - 0.5) * 0.8;
-                    const y = Math.random() * 1.5;
-                    const z = (Math.random() - 0.5) * 0.8;
-
-                    hurtEntity.dimension.spawnParticle('minecraft:blue_flame_particle', {
-                        x: loc.x + x,
-                        y: loc.y + y,
-                        z: loc.z + z
-                    });
-                }
-            }
+            if (equ.getEquipment(slot) == undefined) equ.setEquipment(slot, itemStack)
         }
 
-        if (damage?.typeId == 'minecraft:player' && hurt.typeId == 'minecraft:player') {
+        if (hurtSave?.armorLockEnd !== undefined) {
 
-            if (aktiveDuel[hurt.name] === damage.name) {
+            lockEmptySlot('Head')
+            lockEmptySlot('Chest')
+            lockEmptySlot('Legs')
+            lockEmptySlot('Feet')
+        }
+    }
 
-                const duelName = aktiveDuel[damage.name]
-                setDuel(duelName, damage.name)
-            }
+    if (damage?.typeId === 'minecraft:player') {
 
-            if (aktiveDuel[damage.name] == undefined && aktiveDuel[hurt.name] == undefined && setts?.loastHeart !== false) {
+        const head = damage.getComponent('minecraft:equippable').getEquipment('Head');
 
-                const mainHand = damage.getComponent('equippable').getEquipment('Mainhand')
+        if (head?.typeId === 'krone:helden') {
 
-                if (mainHand?.typeId == 'helden:soul_stealer') {
+            const loc = hurtEntity.location;
 
-                    if (damageSave.heart <= 3 && hurtSave.heart >= 1) {
+            for (let i = 0; i < 10; i++) {
 
-                        const { x, y, z } = damage.location
-                        const dimension = world.getDimension(damage.dimension.id)
+                const x = (Math.random() - 0.5) * 0.8;
+                const y = Math.random() * 1.5;
+                const z = (Math.random() - 0.5) * 0.8;
 
-                        {
-                            const { x, y, z } = hurt.location
-                            dimension.spawnParticle('helden:heart_minus', { x, y: y + 1, z })
-                        }
-
-                        damage.runCommand('clear @s helden:soul_stealer 0 1')
-
-                        dimension.spawnParticle('helden:heart_plus', { x, y: y + 1, z })
-                        dimension.playSound('shriek.sculk_shrieker', { x, y, z });
-
-                        setHeart(damage.name, (damageSave.heart + 1))
-                        setHeart(hurt.name, (hurtSave.heart - 1))
-                    }
-
-                } else {
-
-                    if (!damageSave?.combatlog) {
-                        sendMessage('helden.entityHurt.attacked', { name: damage.name, withs: [hurt.name] })
-                    }
-
-                    if (!hurtSave?.combatlog) {
-                        sendMessage('helden.entityHurt.attacked2', { name: hurt.name, withs: [damage.name] })
-                    }
-
-                    setCombat(damage.name, damage);
-                    setCombat(hurt.name, hurt);
-
-                    hurtSave.lastAttacker = damage.name
-
-                    if (setts?.armorLock === undefined || setts.armorLock) {
-
-                        startArmorLock(damage.name)
-                        startArmorLock(hurt.name)
-                    }
-                }
+                hurtEntity.dimension.spawnParticle('minecraft:blue_flame_particle', {
+                    x: loc.x + x,
+                    y: loc.y + y,
+                    z: loc.z + z
+                });
             }
         }
+    }
 
-        if (setts?.loastHeart !== false) {
+    if (damage?.typeId == 'minecraft:player' && hurt.typeId == 'minecraft:player') {
 
-            if (hurt.typeId === 'helden:dummy') {
+        if (aktiveDuel[hurt.name] === damage.name) {
 
-                setCombat(hurt.nameTag, hurt)
+            const duelName = aktiveDuel[damage.name]
+            setDuel(duelName, damage.name)
+        }
 
-                if (damage?.typeId === 'minecraft:player') {
+        if (aktiveDuel[damage.name] == undefined && aktiveDuel[hurt.name] == undefined && setts?.loastHeart !== false) {
 
-                    setCombat(damage.name, damage);
+            const mainHand = damage.getComponent('equippable').getEquipment('Mainhand')
 
-                    if (setts?.armorLock === undefined || setts.armorLock) {
+            if (mainHand?.typeId == 'helden:soul_stealer') {
 
-                        startArmorLock(damage.name)
+                if (damageSave.heart <= 3 && hurtSave.heart >= 1) {
+
+                    const { x, y, z } = damage.location
+                    const dimension = world.getDimension(damage.dimension.id)
+
+                    {
+                        const { x, y, z } = hurt.location
+                        dimension.spawnParticle('helden:heart_minus', { x, y: y + 1, z })
                     }
-                }
-            }
 
-            if (hurtSave?.combatlog > 0) {
+                    damage.runCommand('clear @s helden:soul_stealer 0 1')
+
+                    dimension.spawnParticle('helden:heart_plus', { x, y: y + 1, z })
+                    dimension.playSound('shriek.sculk_shrieker', { x, y, z });
+
+                    setHeart(damage.name, (damageSave.heart + 1))
+                    setHeart(hurt.name, (hurtSave.heart - 1))
+                }
+
+            } else {
+
+                if (!damageSave?.combatlog) sendMessage('helden.entityHurt.attacked', { name: damage.name, withs: [hurt.name] })
+                if (!hurtSave?.combatlog) sendMessage('helden.entityHurt.attacked2', { name: hurt.name, withs: [damage.name] })
+
+                if (!damageSave?.combatlog) damage.addTag('in_combat')
+                if (!hurtSave?.combatlog) hurt.addTag('in_combat')
+
+                setCombat(damage.name, damage);
                 setCombat(hurt.name, hurt);
+
+                hurtSave.lastAttacker = damage.name
+
+                if (damageSave?.lastAttacker == undefined) {
+
+                    damageSave.lastAttacker = hurt.name
+                }
+
+                if (setts?.armorLock === undefined || setts.armorLock) {
+
+                    startArmorLock(damage.name)
+                    startArmorLock(hurt.name)
+                }
             }
         }
-    })
-})
+    }
+
+    if (setts?.loastHeart !== false) {
+
+        if (hurt.typeId === 'helden:dummy') {
+
+            setCombat(hurt.nameTag, hurt)
+
+            if (damage?.typeId === 'minecraft:player') {
+
+                setCombat(damage.name, damage);
+
+                if (setts?.armorLock === undefined || setts.armorLock) {
+
+                    startArmorLock(damage.name)
+                }
+            }
+        }
+
+        if (hurtSave?.combatlog > 0) setCombat(hurt.name, hurt);
+    }
+}))
 
 world.beforeEvents.entityHurt.subscribe((event) => {
 
@@ -130,20 +149,15 @@ world.beforeEvents.entityHurt.subscribe((event) => {
     const damagingSave = heldenSave().player[damagingEntity?.name]
     const hurtSave = heldenSave().player[hurtEntity.name]
 
-    if (damagingEntity?.typeId == 'minecraft:player' && hurtEntity.typeId == 'minecraft:player') {
+    const setts = heldenSave().settings
 
-        if (damagingSave?.linkheart == hurtEntity.name) {
+    if (setts?.heartMode == 1 &&
+        damagingSave?.partner == hurtEntity.name &&
+        damagingEntity?.typeId == 'minecraft:player' &&
+        hurtEntity.typeId == 'minecraft:player') {
 
-            if (damagingSave.heart <= 1) {
-
-                event.cancel = true
-            }
-
-            if (hurtSave.heart <= 1) {
-
-                event.cancel = true
-            }
-        }
+        if (damagingSave.heart === 1) event.cancel = true
+        if (hurtSave.heart === 1) event.cancel = true
     }
 
     if (hurtEntity.typeId === 'minecraft:player' && event.cancel !== true) {

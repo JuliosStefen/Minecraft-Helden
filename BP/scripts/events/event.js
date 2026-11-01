@@ -1,6 +1,7 @@
 import './entityHurt/entityHurt';
 import './spawnLeave/spawnLeave';
 import './entityDie/entityDie';
+import './swingSelectedSlot';
 import './dimensionChange';
 import './gameRuleChange';
 import './InteractPlace';

@@ -1,18 +1,23 @@
-import { setNameTag, sendMessage, randomLink, playerLimit } from '../runs/run';
-import { resetAllArmorLocks } from '../runs/armorLock';
-import { headhuntSpielerBereit, headhuntZuruecksetzen } from '../function/headhunt';
+import { setNameTag, sendMessage, randomPartner, playerLimit } from '../runs/run';
 import { ActionFormData, ModalFormData } from '@minecraft/server-ui';
+import { resetAllArmorLocks } from '../runs/armorLock';
+import { setHeart, maxHeart } from '../function/heart';
 import { world, system } from '@minecraft/server';
-import { installPlayer } from '../runs/install'
 import { heldenSave } from '../function/heldenSave';
 
 export function settings(senders) {
 
+    const sender = senders.sourceEntity
+
+    if (world.getPackSettings()['mc_helden:settings'] == false) {
+
+        sendMessage('helden.settings.disabled', { name: sender.name });
+        return;
+    }
+
     system.run(() => {
 
-        const sender = senders.sourceEntity
         const setts = heldenSave().settings
-
         const settings = new ActionFormData()
 
         settings.title('helden.ui.settingsTitle')
@@ -31,29 +36,27 @@ export function settings(senders) {
                 const heartSystem = new ModalFormData();
 
                 heartSystem.title('helden.ui.heartSystemTitle')
-                    .dropdown('helden.ui.heartSystemDropdown', [{ translate: 'helden.ui.heartSystemNormal' }, { translate: 'helden.ui.heartSystemLinked' }, { translate: 'helden.ui.heartSystemHeadhunt' }], { defaultValueIndex: setts?.headhunt ? 2 : (setts?.linkheart ? 1 : 0) })
+                    .dropdown('helden.ui.heartSystemDropdown', [{ translate: 'helden.ui.heartSystemNormal' }, { translate: 'helden.ui.heartSystemLinked' }, { translate: 'helden.ui.heartSystemHeadhunt' }], { defaultValueIndex: setts?.heartMode ?? 2 })
                     .toggle('helden.ui.showHeadhunt', { defaultValue: setts?.showHeadhunt ?? false })
                     .submitButton('helden.ui.save')
                 heartSystem.show(sender).then((r) => {
 
                     if (r.canceled) return;
 
-                    setts.linkheart = (r.formValues[0] == 1)
-                    setts.headhunt = (r.formValues[0] == 2)
-                    setts.showHeadhunt = r.formValues[1]
-
-                    if (setts.headhunt) {
-
-                        world.getPlayers().forEach(player => {
-
-                            headhuntSpielerBereit(player.name);
-                        })
-                    }
-
                     world.getPlayers().forEach(player => {
 
-                        setNameTag(player.name);
+                        const playerSave = heldenSave().player[player.name]
+
+                        if (setts.heartMode !== r.formValues[0]) {
+
+                            setHeart(player.name, maxHeart(r.formValues[0]).def)
+                            delete playerSave.headhunt
+
+                        } else if (setts.showHeadhunt) setHeart(player.name, playerSave.heart)
                     })
+
+                    setts.heartMode = r.formValues[0]
+                    setts.showHeadhunt = r.formValues[1]
 
                     sendMessage('helden.settings.updates', { name: sender.name });
                 })
@@ -65,10 +68,12 @@ export function settings(senders) {
 
                 toggles.title('helden.ui.togglesTitle')
                     .toggle('helden.ui.debug', { defaultValue: setts?.debug ?? false })
+                    .toggle('helden.ui.showOtherHearts', { defaultValue: setts?.showOtherheart ?? false })
                     .toggle('helden.ui.loseHeart', { defaultValue: setts?.loastHeart ?? true })
+                    .label('helden.ui.onCombat')
                     .toggle('helden.ui.blockTrident', { defaultValue: setts?.blockTrident ?? true })
                     .toggle('helden.ui.blockChest', { defaultValue: setts?.blockChest ?? true })
-                    .toggle('helden.ui.showOtherHearts', { defaultValue: setts?.showOtherheart ?? false })
+                    .toggle('helden.ui.blockLunge', { defaultValue: setts?.blockLunge ?? true })
                     .label('helden.ui.dimension')
                     .toggle('helden.ui.theEnd', { defaultValue: setts?.lockEnd ?? false })
                     .toggle('helden.ui.nether', { defaultValue: setts?.lockNether ?? false })
@@ -79,14 +84,16 @@ export function settings(senders) {
                     if (r.canceled) return;
 
                     setts.debug = r.formValues[0]
-                    setts.loastHeart = r.formValues[1]
-                    setts.blockTrident = r.formValues[2]
-                    setts.blockChest = r.formValues[3]
-                    setts.showOtherheart = r.formValues[4]
-                    // Dimension label [5]
-                    setts.lockEnd = r.formValues[6]
-                    setts.lockNether = r.formValues[7]
-                    setts.heartColor = r.formValues[8]
+                    setts.showOtherheart = r.formValues[1]
+                    setts.loastHeart = r.formValues[2]
+                    // Im Kampf label [3]
+                    setts.blockTrident = r.formValues[4]
+                    setts.blockChest = r.formValues[5]
+                    setts.blockLunge = r.formValues[6]
+                    // Dimension label [7]
+                    setts.lockEnd = r.formValues[8]
+                    setts.lockNether = r.formValues[9]
+                    setts.heartColor = r.formValues[10]
 
                     world.getPlayers().forEach(player => {
 
@@ -171,11 +178,10 @@ export function settings(senders) {
                 const remove = new ModalFormData();
 
                 remove.title('helden.ui.deleteTitle')
-                    .toggle('helden.ui.linkHeart')
+                    .toggle('helden.ui.partner')
                     .toggle('helden.ui.hearts')
                     .toggle('helden.ui.duel')
                     .toggle('helden.ui.armorLockReset')
-                    .toggle('helden.ui.headhuntReset')
                     .toggle('helden.ui.combatlogReset')
                     .toggle('helden.ui.players')
                     .toggle('helden.ui.settings')
@@ -187,27 +193,22 @@ export function settings(senders) {
 
                     if (r.formValues[0]) {
 
-                        for (const name in heldenSave().player) {
-                            delete heldenSave().player[name].linkheart
-                        }
+                        for (const name in heldenSave().player) delete heldenSave().player[name].partner
 
-                        sendMessage('helden.settings.removeLinkheart', { name: sender.name })
+                        sendMessage('helden.settings.removePartner', { name: sender.name })
                     }
 
                     if (r.formValues[1]) {
 
-                        for (const name in heldenSave().player) {
-                            delete heldenSave().player[name].heart
-                        }
+                        for (const name in heldenSave().player) delete heldenSave().player[name].heart
+                        for (const name in heldenSave().player) delete heldenSave().player[name].headhunt
 
                         sendMessage('helden.settings.removeHeart', { name: sender.name })
                     }
 
                     if (r.formValues[2]) {
 
-                        for (const name in heldenSave().player) {
-                            delete heldenSave().player[name].duel
-                        }
+                        for (const name in heldenSave().player) delete heldenSave().player[name].duel
 
                         sendMessage('helden.settings.removeDuel', { name: sender.name })
                     }
@@ -221,58 +222,41 @@ export function settings(senders) {
 
                     if (r.formValues[4]) {
 
-                        headhuntZuruecksetzen()
-
-                        sendMessage('helden.settings.removeHeadhunt', { name: sender.name })
-                    }
-
-                    if (r.formValues[5]) {
-
-                        for (const name in heldenSave().player) {
-                            delete heldenSave().player[name].combatlog
-                        }
-
-                        for (const name in playerLimit) {
-                            delete playerLimit[name]
-                        }
+                        for (const name in heldenSave().player) delete heldenSave().player[name].combatlog
+                        for (const name in playerLimit) delete playerLimit[name]
 
                         sendMessage('helden.settings.removeCombatlog', { name: sender.name })
                     }
 
-                    if (r.formValues[6]) {
+                    if (r.formValues[5]) {
 
                         heldenSave().player = {}
 
                         sendMessage('helden.settings.removePlayer', { name: sender.name })
                     }
 
-                    if (r.formValues[7]) {
+                    if (r.formValues[6]) {
 
                         heldenSave().settings = {}
-                        heldenSave().settings.linkheart = false
-                        heldenSave().settings.headhunt = true
                         sendMessage('helden.settings.removeSettings', { name: sender.name })
                     }
 
-                    if (r.formValues[8]) {
+                    if (r.formValues[7]) {
 
                         heldenSave().player = {}
                         heldenSave().settings = {}
-                        heldenSave().settings.linkheart = false
-                        heldenSave().settings.headhunt = true
 
                         sendMessage('helden.settings.removeAll', { name: sender.name })
                     }
 
                     world.getPlayers().forEach((player) => {
 
+                        const playerSave = heldenSave().player[player.name] ??= {}
+
                         setNameTag(player.name);
-                        installPlayer(player.name);
+                        playerSave.heart ??= maxHeart().def
 
-                        if (heldenSave().player[player.name]?.linkheart == undefined) {
-
-                            randomLink[player.name] = player.name
-                        }
+                        if (playerSave?.partner == undefined) randomPartner[player.name] = player.name
                     })
                 })
             }

@@ -1,76 +1,80 @@
 import { aktiveDuel, duelEnd } from '../../function/duel';
-import { world, system } from '@minecraft/server';
-import { sendMessage } from '../../runs/run';
+import { setHeart, maxHeart } from '../../function/heart';
 import { releaseArmorLock } from '../../runs/armorLock';
+import { world, system } from '@minecraft/server';
+import { deathMessage } from './deathMessage';
+import { sendMessage } from '../../runs/run';
 import { heldenSave } from '../../function/heldenSave';
 import { playDeath } from '../../function/deathAnimation';
-import { setHeart } from '../../function/setHeart';
-import { istHeadhuntKill, headhuntKillVerarbeiten } from '../../function/headhunt';
 
-import { deathMessage } from './deathMessage'
+world.afterEvents.entityDie.subscribe(({ deadEntity, damageSource }) => system.run(() => {
 
-world.afterEvents.entityDie.subscribe(({ deadEntity, damageSource }) => {
+    const damager = damageSource?.damagingEntity
 
-    system.run(() => {
+    if (deadEntity.typeId === 'helden:dummy') {
 
-        const damager = damageSource?.damagingEntity
+        const dummySave = heldenSave().player[deadEntity.nameTag]
+        const keepInventory = world.gameRules.keepInventory
 
-        if (deadEntity.typeId === 'helden:dummy') {
+        dummySave.dummy = { kill: true, keepInventory }
+        delete dummySave.combatlog
 
-            const dummySave = heldenSave().player[deadEntity.nameTag]
-            const keepInventory = world.gameRules.keepInventory
+        deathMessage(deadEntity, damager)
+        setHeart(deadEntity.nameTag, (dummySave.heart - 1))
+    }
 
-            dummySave.dummy = { kill: true, keepInventory }
-            delete dummySave.combatlog
+    if (deadEntity.typeId === 'minecraft:player') {
 
-            deathMessage(deadEntity, damager)
-            setHeart(deadEntity.nameTag, (dummySave.heart - 1))
-        }
+        releaseArmorLock(deadEntity.name)
 
-        if (deadEntity.typeId === 'minecraft:player') {
+        const deadSave = heldenSave().player[deadEntity.name]
 
-            releaseArmorLock(deadEntity.name)
+        if (aktiveDuel[deadEntity.name]) {
 
-            const deadSave = heldenSave().player[deadEntity.name]
+            const duelName = aktiveDuel[deadEntity.name]
 
-            if (aktiveDuel[deadEntity.name]) {
+            duelEnd(duelName);
 
-                const duelName = aktiveDuel[deadEntity.name]
+            deadSave.duel++
+            heldenSave().player[duelName].duel++
 
-                duelEnd(duelName);
+            sendMessage('helden.entityDie.winDuel', { withs: [duelName, deadEntity.name] });
 
-                deadSave.duel++
-                heldenSave().player[duelName].duel++
+        } else {
 
-                sendMessage('helden.entityDie.winDuel', { withs: [duelName, deadEntity.name] });
+            const playerSave = heldenSave().player[deadEntity.name]
+            const setts = heldenSave().settings
 
-            } else {
+            if (setts?.loastHeart == undefined || setts?.loastHeart) {
 
-                const playerSave = heldenSave().player[deadEntity.name]
-                const setts = heldenSave().settings
+                const killerName = damager?.typeId == 'minecraft:player' ? damager?.name : playerSave.lastAttacker
 
-                if (setts?.loastHeart == undefined || setts?.loastHeart) {
+                if (setts?.heartMode == 2 && setts?.showHeadhunt &&
+                    playerSave?.partner == killerName &&
+                    playerSave?.partner !== undefined &&
+                    playerSave?.headhunt == undefined) {
 
-                    if (deadSave?.combatlog >= 0.500 || damager?.typeId === 'minecraft:player') {
+                    const killerSave = heldenSave().player[killerName]
 
-                        deathMessage(deadEntity, damager, deadSave.lastAttacker)
+                    sendMessage('helden.headhunt.won', { name: killerName, withs: [deadEntity.name] })
+                    sendMessage('helden.headhunt.wonBroadcast', { withs: [killerName, deadEntity.name] })
 
-                        if (setts?.headhunt && setts?.showHeadhunt && damager?.typeId === 'minecraft:player' && istHeadhuntKill(damager.name, deadEntity.name)) {
+                    setHeart(killerName, Math.min(maxHeart().max, killerSave.heart + 1))
 
-                            headhuntKillVerarbeiten(damager.name, deadEntity.name)
+                    killerSave.headhunt = true
+                    playerSave.headhunt = false
 
-                        } else {
+                } else if (deadSave?.combatlog >= 0.500 || damager?.typeId == 'minecraft:player') {
 
-                            setHeart(deadEntity.name, (deadSave.heart - 1))
-                        }
+                    setHeart(deadEntity.name, (deadSave.heart - 1))
 
-                        playDeath(deadEntity);
-                    }
+                    deathMessage(deadEntity, damager)
+                    playDeath(deadEntity);
                 }
 
                 delete playerSave.combatlog
                 delete playerSave.lastAttacker
             }
         }
-    })
-})
+    }
+}))

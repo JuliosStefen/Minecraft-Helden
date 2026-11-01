@@ -1,6 +1,6 @@
-import { heldenSave } from '../function/heldenSave';
 import { ModalFormData } from '@minecraft/server-ui';
-import { world, system } from '@minecraft/server';
+import { heldenSave } from '../function/heldenSave';
+import { system } from '@minecraft/server';
 
 export function debug(senders) {
 
@@ -8,10 +8,7 @@ export function debug(senders) {
 
     system.run(() => {
 
-        if (!sender) {
-
-            console.log(`§l§6Debug: §r§a${JSON.stringify(heldenSave())}`);
-        }
+        if (!sender) console.log(`§l§6Debug: §r§a${JSON.stringify(heldenSave())}`);
 
         if (sender?.typeId == 'minecraft:player') {
 

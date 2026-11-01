@@ -1,7 +1,8 @@
 import { playerLimit, sendMessage } from '../runs/run';
-import { settings } from '../commands/settings';
+import { maxHeart, setHeart } from '../function/heart';
 import { world, system } from '@minecraft/server';
 import { heldenSave } from '../function/heldenSave';
+import { settings } from '../commands/settings';
 
 const cooldown = {}
 
@@ -16,7 +17,9 @@ world.beforeEvents.itemUse.subscribe((event) => {
 
         const playerSave = heldenSave().player[source.name];
 
-        if ((setts?.blockTrident === undefined || setts.blockTrident) && playerSave?.combatlog >= 0) {
+        if (itemStack.typeId === 'helden:settings_item') settings({ sourceEntity: source })
+
+        if ((setts?.blockTrident === undefined || setts.blockTrident) && playerSave?.combatlog) {
 
             if (itemStack.typeId === 'minecraft:trident' && source.typeId === 'minecraft:player') {
 
@@ -31,63 +34,52 @@ world.beforeEvents.itemUse.subscribe((event) => {
             }
         }
 
-        if (itemStack.typeId === 'helden:settings_item') {
-
-            settings({ sourceEntity: source })
-        }
-
         if (itemStack.typeId === 'helden:soul_amulet') {
 
             const playerSave = heldenSave().player[source.name]
 
-            if (playerSave.heart < 4) {
+            if (playerSave.heart <= maxHeart().max - 1) system.run(() => {
 
-                system.run(() => {
+                const { x, y, z } = source.location
+                const dimension = world.getDimension(source.dimension.id)
 
-                    const { x, y, z } = source.location
-                    const dimension = world.getDimension(source.dimension.id)
+                world.gameRules.sendCommandFeedback = false;
 
-                    world.gameRules.sendCommandFeedback = false;
+                source.runCommand('clear @s helden:soul_amulet 0 1');
+                source.runCommand('give @s helden:broken_soul_amulet');
 
-                    source.runCommand('clear @s helden:soul_amulet 0 1');
-                    source.runCommand('give @s helden:broken_soul_amulet');
+                world.gameRules.sendCommandFeedback = true;
 
-                    world.gameRules.sendCommandFeedback = true;
+                dimension.spawnParticle('helden:heart_plus', { x, y: y + 1, z })
 
-                    dimension.spawnParticle('helden:heart_plus', { x, y: y + 1, z })
+                dimension.playSound('shriek.sculk_shrieker', { x, y, z });
+                dimension.playSound('random.glass', { x, y, z });
 
-                    dimension.playSound('shriek.sculk_shrieker', { x, y, z });
-                    dimension.playSound('random.glass', { x, y, z });
-
-                    playerSave.heart++
-                })
-            }
+                setHeart(source.name, playerSave.heart + 1)
+            })
         }
 
         if (itemStack.typeId === 'helden:broken_soul_amulet') {
 
             const playerSave = heldenSave().player[source.name]
 
-            if (playerSave.heart > 2) {
+            if (playerSave.heart >= maxHeart().min + 1) system.run(() => {
 
-                system.run(() => {
+                const { x, y, z } = source.location
+                const dimension = world.getDimension(source.dimension.id)
 
-                    const { x, y, z } = source.location
-                    const dimension = world.getDimension(source.dimension.id)
+                world.gameRules.sendCommandFeedback = false;
 
-                    world.gameRules.sendCommandFeedback = false;
+                source.runCommand('clear @s helden:broken_soul_amulet 0 1');
+                source.runCommand('give @s helden:soul_amulet');
 
-                    source.runCommand('clear @s helden:broken_soul_amulet 0 1');
-                    source.runCommand('give @s helden:soul_amulet');
+                world.gameRules.sendCommandFeedback = true;
 
-                    world.gameRules.sendCommandFeedback = true;
+                dimension.spawnParticle('helden:heart_minus', { x, y: y + 1, z })
+                dimension.playSound('shriek.sculk_shrieker', { x, y, z });
 
-                    dimension.spawnParticle('helden:heart_minus', { x, y: y + 1, z })
-                    dimension.playSound('shriek.sculk_shrieker', { x, y, z });
-
-                    playerSave.heart--
-                })
-            }
+                setHeart(source.name, playerSave.heart - 1)
+            })
         }
 
         if (itemStack?.typeId === 'minecraft:ender_pearl' && (setts?.pearl_limitEna === undefined || setts?.pearl_limitEna)) {

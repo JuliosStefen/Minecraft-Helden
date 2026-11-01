@@ -1,8 +1,10 @@
 import { sendMessage } from '../../runs/run';
+import { heldenSave } from '../../function/heldenSave';
 
-export function deathMessage(deadEntity, killer, killerNameFallback) {
+export function deathMessage(deadEntity, killer) {
 
-    const killerName = killer?.name ?? killerNameFallback
+    const lastAttacker = heldenSave().player[deadEntity.name]?.lastAttacker
+    const killerName = killer?.name ?? lastAttacker
 
     if (killerName) {
 
@@ -16,5 +18,6 @@ export function deathMessage(deadEntity, killer, killerNameFallback) {
 
             sendMessage('helden.entityDie.killedFrom', { withs: [deadEntity?.name ?? deadEntity.nameTag, killerName] });
         }
+
     }
 }

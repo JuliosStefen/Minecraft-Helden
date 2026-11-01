@@ -1,16 +1,25 @@
-import { system, CustomCommandParamType } from '@minecraft/server';
+import { system, world, CustomCommandParamType } from '@minecraft/server';
 import { brueckenbauer } from './brueckenbauer';
 import { banbydeath } from './banbydeath';
-import { linkheart } from './linkheart';
 import { settings } from './settings';
+import { partner } from './partner';
 import { heart } from './heart';
 import { debug } from './debug';
 import { duel } from './duel';
 
 system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
 
-    customCommandRegistry.registerEnum('helden:option', ['add', 'remove', 'enabled', 'disanabled', 'list']);
+    customCommandRegistry.registerEnum('helden:option', ['add', 'remove', 'enabled', 'disanabled', 'get']);
     customCommandRegistry.registerEnum('helden:answer', ['accept', 'denny'])
+
+    if (world.getPackSettings()['mc_helden:settings']) {
+
+        customCommandRegistry.registerCommand({
+            name: 'helden:settings',
+            description: 'helden.commandDescription.settings',
+            permissionLevel: 1
+        }, settings);
+    }
 
     customCommandRegistry.registerCommand({
         name: 'helden:heart',
@@ -25,14 +34,8 @@ system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
     }, heart);
 
     customCommandRegistry.registerCommand({
-        name: 'helden:settings',
-        description: 'helden.commandDescription.settings',
-        permissionLevel: 1
-    }, settings);
-
-    customCommandRegistry.registerCommand({
-        name: 'helden:linkheart',
-        description: 'helden.commandDescription.linkheart',
+        name: 'helden:partner',
+        description: 'helden.commandDescription.partner',
         permissionLevel: 1,
         mandatoryParameters: [
             { type: CustomCommandParamType.Enum, name: 'helden:option' },
@@ -41,7 +44,7 @@ system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
         optionalParameters: [
             { type: CustomCommandParamType.String, name: 'name 2' }
         ]
-    }, linkheart);
+    }, partner);
 
     customCommandRegistry.registerCommand({
         name: 'helden:brückenbauer',

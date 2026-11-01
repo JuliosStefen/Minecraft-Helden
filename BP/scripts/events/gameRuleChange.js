@@ -3,8 +3,6 @@ import { world } from '@minecraft/server';
 
 world.afterEvents.gameRuleChange.subscribe(({ rule }) => {
 
-    world.gameRules.showDeathMessages = false;
-
     if (rule == 'keepInventory') {
 
         for (const name in dummyIds) {
