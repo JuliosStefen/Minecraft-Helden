@@ -1,0 +1,45 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.victory_sword.first_person_hold": {
+			"loop": true,
+			"bones": {
+				"root_item": {
+					"rotation": [
+						152.1909,
+						11.734,
+						51.0855
+					],
+					"position": [
+						-0.69019,
+						21.57095,
+						5.22021
+					],
+					"scale": 0.8
+				}
+			}
+		},
+		"animation.victory_sword.third_person_hold": {
+			"loop": true,
+			"bones": {
+				"root_item": {
+					"rotation": [
+						90,
+						0,
+						90
+					],
+					"position": [
+						0.5,
+						22.43065,
+						-3.62252
+					],
+					"scale": [
+						0.7,
+						0.8,
+						0.8
+					]
+				}
+			}
+		}
+	}
+}

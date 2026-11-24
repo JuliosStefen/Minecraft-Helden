@@ -17,6 +17,9 @@
 		},
 		"armor_lock": {
 			"textures": "textures/blocks/barrier"
+		},
+		"victory_sword": {
+			"textures": "textures/items/victory_sword"
 		}
 	}
 }
